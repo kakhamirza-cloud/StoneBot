@@ -1,0 +1,35 @@
+{
+  "name": "spark-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for $Stone points and loot box system",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "watch": "tsc -w",
+    "register-commands": "ts-node src/register-commands.ts",
+    "pm2:start": "pm2 start ecosystem.config.js",
+    "pm2:stop": "pm2 stop spark-bot",
+    "pm2:restart": "pm2 restart spark-bot",
+    "pm2:logs": "pm2 logs spark-bot",
+    "pm2:status": "pm2 status"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "spark",
+    "lootbox"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

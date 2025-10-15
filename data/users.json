@@ -1,0 +1,170 @@
+{
+  "911029309286776894": {
+    "userId": "911029309286776894",
+    "username": "stonetoshi",
+    "points": 2,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "gtdWhitelist": 0,
+          "fcfsWhitelist": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1427758749329784966": [
+        "❤️"
+      ],
+      "1427770436816474164": [
+        "😡"
+      ]
+    },
+    "gmCooldown": 0
+  },
+  "1096366607573454939": {
+    "userId": "1096366607573454939",
+    "username": "gabriel_eth",
+    "points": 0,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "gtdWhitelist": 0,
+          "fcfsWhitelist": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {},
+    "gmCooldown": 0
+  },
+  "410662767981232128": {
+    "userId": "410662767981232128",
+    "username": "mr.z6931",
+    "points": 28,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "gtdWhitelist": 0,
+          "fcfsWhitelist": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        },
+        "sparkWalletAddress": "444",
+        "taprootWalletAddress": "444"
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "ZXKp5vHYR2",
+      "uses": 1,
+      "pointsEarned": 10,
+      "invitedUsers": [
+        "1237810533030166580"
+      ]
+    },
+    "reactionData": {
+      "1427766990399082710": [
+        "😀",
+        "🙂‍↔️",
+        "😔",
+        "😕",
+        "🥶"
+      ],
+      "1427768431952007228": [
+        "😙",
+        "😞",
+        "😳",
+        "🥵",
+        "😱"
+      ],
+      "1427770436816474164": [
+        "😡",
+        "😞",
+        "😳"
+      ],
+      "1427770852853813280": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 1760478599317
+  },
+  "1246080513417023498": {
+    "userId": "1246080513417023498",
+    "username": "keeperofstone",
+    "points": 52,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "gtdWhitelist": 0,
+          "fcfsWhitelist": 1,
+          "airdropAllocations": 0,
+          "sparkTokens": 160
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1427770852853813280": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 1760478556897
+  },
+  "1237810533030166580": {
+    "userId": "1237810533030166580",
+    "username": "trinidadversa",
+    "points": 1,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "gtdWhitelist": 0,
+          "fcfsWhitelist": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {},
+    "gmCooldown": 1760478738693
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "lootBoxCost": 5,
+  "invitePoints": 10,
+  "twitterPoints": {
+    "like": 1,
+    "retweet": 1,
+    "comment": 1
+  },
+  "cooldowns": {
+    "tweetSubmission": 86400000
+  }
+}

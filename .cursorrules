@@ -1,0 +1,34 @@
+# Cursor AI Rules for E9 Gym Project
+
+## Project Scope
+- This AI agent should ONLY work within the "E9 Gym" project folder
+- Do not access or modify files outside of this project directory
+- Focus all operations on files within: D:\Cursor Project\E9 Gym\
+
+## Project Context
+- This is the E9 Gym project
+- All source files, assets, and configurations should be contained within this directory
+- This project is completely independent from other projects in the workspace
+
+## Restrictions
+- Never access files from "Glyphs Bot 1", "Glyphs Bot Game", "Trainer", or "E9 Web" projects
+- Do not suggest changes that would affect other projects
+- Keep all file operations scoped to this project only
+- Do not modify shared configuration files outside this directory
+- Do not create symlinks or references to other project folders
+
+## File Structure
+- All project files should be contained within this directory
+- Use relative paths for internal file references
+- Keep dependencies and configurations isolated
+
+## Coding Standards
+- Follow best practices for the chosen technology stack
+- Use appropriate frameworks and libraries for the project type
+- Maintain clean, modular code structure
+- Ensure all assets and resources are self-contained within this project
+
+## Security
+- Do not expose sensitive information from other projects
+- Keep API keys and secrets project-specific
+- Maintain proper separation of concerns between projects
