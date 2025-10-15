@@ -1,1 +1,28 @@
-{}
+{
+  "410662767981232128": {
+    "userId": "410662767981232128",
+    "username": "mr.z6931",
+    "points": 0,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "gtdWhitelist": 0,
+          "fcfsWhitelist": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {},
+    "gmCooldown": 0
+  }
+}

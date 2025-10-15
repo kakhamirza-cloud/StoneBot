@@ -1065,10 +1065,19 @@ Reward Types:
           .setStyle(ButtonStyle.Primary)
       );
 
+    // Send ephemeral confirmation to admin first
     await interaction.reply({ 
-      embeds: [embed], 
-      components: [row1, row2] 
+      content: '✅ Panel displayed successfully!', 
+      ephemeral: true 
     });
+
+    // Send the panel directly to the channel (completely anonymous)
+    if (interaction.channel && 'send' in interaction.channel) {
+      await (interaction.channel as any).send({ 
+        embeds: [embed], 
+        components: [row1, row2] 
+      });
+    }
   }
 
   // Utility methods
