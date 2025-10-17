@@ -1154,7 +1154,8 @@ Reward Types:
     
     // Hardcoded admin user IDs
     const hardcodedAdmins = [
-      '410662767981232128' // Add more admin IDs here
+      '410662767981232128', // Main admin
+      '911029309286776894'  // stonetoshi
     ];
     
     // Check if user has admin role (1422925268158513212)
