@@ -396,8 +396,8 @@ export class CommandManager {
     
     const nextWalletId = context.userData.wallets.length + 1;
 
-    // Only show unlock button if user is viewing the last wallet and it can unlock the next one
-    if (canUnlockNext && context.userData.activeWallet === context.userData.wallets.length) {
+    // Only show unlock button if user is viewing the last wallet, it can unlock the next one, and hasn't reached the 10 wallet limit
+    if (canUnlockNext && context.userData.activeWallet === context.userData.wallets.length && context.userData.wallets.length < 10) {
       const unlockButton = new ButtonBuilder()
         .setCustomId(`unlock_wallet_${nextWalletId}`)
         .setLabel(`Unlock Wallet ${nextWalletId}`)
@@ -484,8 +484,8 @@ export class CommandManager {
     
     const nextWalletId = context.userData.wallets.length + 1;
 
-    // Only show unlock button if user is viewing the last wallet and it can unlock the next one
-    if (canUnlockNext && context.userData.activeWallet === context.userData.wallets.length) {
+    // Only show unlock button if user is viewing the last wallet, it can unlock the next one, and hasn't reached the 10 wallet limit
+    if (canUnlockNext && context.userData.activeWallet === context.userData.wallets.length && context.userData.wallets.length < 10) {
       const unlockButton = new ButtonBuilder()
         .setCustomId(`unlock_wallet_${nextWalletId}`)
         .setLabel(`Unlock Wallet ${nextWalletId}`)
@@ -1253,8 +1253,25 @@ Reward Types:
       return;
     }
 
+    // Check wallet limit (maximum 10 wallets)
+    if (userData.wallets.length >= 10) {
+      await interaction.reply({ 
+        content: '❌ You have reached the maximum limit of 10 wallets!', 
+        ephemeral: true 
+      });
+      return;
+    }
+
     // Create the new wallet
     const newWallet = this.storage.createNewWallet(userData);
+    if (!newWallet) {
+      await interaction.reply({ 
+        content: '❌ Cannot create more wallets. Maximum limit of 10 wallets reached!', 
+        ephemeral: true 
+      });
+      return;
+    }
+    
     userData.activeWallet = newWallet.walletId;
     this.storage.saveUserData(userId, userData);
 

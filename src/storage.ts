@@ -296,7 +296,14 @@ export class StorageManager {
     return userData.wallets.find(w => w.walletId === walletId) || null;
   }
 
-  createNewWallet(userData: UserData): UserWallet {
+  createNewWallet(userData: UserData): UserWallet | null {
+    // Maximum wallet limit is 10
+    const MAX_WALLETS = 10;
+    
+    if (userData.wallets.length >= MAX_WALLETS) {
+      return null; // Cannot create more wallets
+    }
+    
     const newWalletId = userData.wallets.length + 1;
     const newWallet: UserWallet = {
       walletId: newWalletId,
