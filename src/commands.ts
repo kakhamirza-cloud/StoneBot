@@ -85,6 +85,7 @@ export class CommandManager {
         new SlashCommandBuilder()
           .setName('additems')
           .setDescription('Add items to a user (Admin only)')
+          .setDefaultMemberPermissions(8) // Administrator permission
           .addUserOption(option =>
             option.setName('user')
               .setDescription('The user to add items to')
@@ -112,6 +113,7 @@ export class CommandManager {
       new SlashCommandBuilder()
         .setName('addpoints')
         .setDescription('Add points to a user (Admin only)')
+        .setDefaultMemberPermissions(8) // Administrator permission
         .addUserOption(option =>
           option.setName('user')
             .setDescription('User to add points to')
@@ -125,7 +127,8 @@ export class CommandManager {
 
       new SlashCommandBuilder()
         .setName('exportwallets')
-        .setDescription('Export all submitted wallet addresses (Admin only)'),
+        .setDescription('Export all submitted wallet addresses (Admin only)')
+        .setDefaultMemberPermissions(8), // Administrator permission
 
       new SlashCommandBuilder()
         .setName('balance')
@@ -134,6 +137,22 @@ export class CommandManager {
       new SlashCommandBuilder()
         .setName('panel')
         .setDescription('Display the Spark Stones ecosystem panel (Admin only)')
+        .setDefaultMemberPermissions(8), // Administrator permission
+
+      new SlashCommandBuilder()
+        .setName('export-data')
+        .setDescription('Export all user data to a downloadable file (Admin only)')
+        .setDefaultMemberPermissions(8), // Administrator permission
+
+      new SlashCommandBuilder()
+        .setName('import-data')
+        .setDescription('Import user data from a JSON file (Admin only)')
+        .setDefaultMemberPermissions(8) // Administrator permission
+        .addAttachmentOption(option =>
+          option.setName('file')
+            .setDescription('JSON file containing user data')
+            .setRequired(true)
+        )
     ];
   }
 
@@ -195,6 +214,12 @@ export class CommandManager {
           break;
         case 'panel':
           await this.handlePanel(interaction, context);
+          break;
+        case 'export-data':
+          await this.handleExportData(interaction, context);
+          break;
+        case 'import-data':
+          await this.handleImportData(interaction, context);
           break;
         default:
           await interaction.reply({ content: 'Unknown command!', ephemeral: true });
@@ -1613,6 +1638,147 @@ Reward Types:
       console.error('Error editing announcement:', error);
       await interaction.reply({ 
         content: '❌ Failed to edit announcement. Please try again.', 
+        ephemeral: true 
+      });
+    }
+  }
+
+  private async handleExportData(interaction: CommandInteraction, context: CommandContext): Promise<void> {
+    if (!context.isAdmin) {
+      await interaction.reply({ 
+        content: '❌ You don\'t have permission to use this command!', 
+        ephemeral: true 
+      });
+      return;
+    }
+
+    try {
+      // Get all user data
+      const allUsers = this.storage.getAllUsers();
+      const globalState = this.storage.getGlobalState();
+      const config = this.storage.getConfig();
+      
+      // Create comprehensive export data
+      const exportData = {
+        timestamp: new Date().toISOString(),
+        totalUsers: Object.keys(allUsers).length,
+        globalState,
+        config,
+        users: allUsers,
+        // Add summary statistics
+        summary: {
+          totalPoints: Object.values(allUsers).reduce((sum, user) => sum + user.points, 0),
+          totalInvites: Object.values(allUsers).reduce((sum, user) => sum + user.inviteData.uses, 0),
+          totalLootBoxes: Object.values(allUsers).reduce((sum, user) => 
+            sum + user.wallets.reduce((walletSum, wallet) => walletSum + wallet.inventory.lootBoxes, 0), 0),
+          topUsers: Object.entries(allUsers)
+            .map(([userId, userData]) => ({
+              userId,
+              username: userData.username,
+              points: userData.points,
+              invites: userData.inviteData.uses,
+              inviteCode: userData.inviteData.inviteCode
+            }))
+            .sort((a, b) => b.points - a.points)
+            .slice(0, 20)
+        }
+      };
+
+      // Create JSON file
+      const jsonContent = JSON.stringify(exportData, null, 2);
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+      const filename = `spark-bot-data-export-${timestamp}.json`;
+
+      const attachment = new AttachmentBuilder(
+        Buffer.from(jsonContent, 'utf8'),
+        { name: filename }
+      );
+
+      await interaction.reply({ 
+        content: `📊 **Data Export Complete!**\n\n**Summary:**\n• Total Users: ${exportData.totalUsers}\n• Total Points: ${exportData.summary.totalPoints}\n• Total Invites: ${exportData.summary.totalInvites}\n• Total Loot Boxes: ${exportData.summary.totalLootBoxes}\n\n**Top 5 Users by Points:**\n${exportData.summary.topUsers.slice(0, 5).map((user, i) => `${i+1}. ${user.username}: ${user.points} points (${user.invites} invites)`).join('\n')}\n\n**File:** \`${filename}\``,
+        files: [attachment],
+        ephemeral: true 
+      });
+
+      console.log(`📊 Admin ${context.user.username} exported data: ${exportData.totalUsers} users, ${exportData.summary.totalPoints} total points`);
+    } catch (error) {
+      console.error('Error exporting data:', error);
+      await interaction.reply({ 
+        content: '❌ Failed to export data. Please try again.', 
+        ephemeral: true 
+      });
+    }
+  }
+
+  private async handleImportData(interaction: CommandInteraction, context: CommandContext): Promise<void> {
+    if (!context.isAdmin) {
+      await interaction.reply({ 
+        content: '❌ You don\'t have permission to use this command!', 
+        ephemeral: true 
+      });
+      return;
+    }
+
+    try {
+      const attachment = (interaction as any).options.getAttachment('file');
+      
+      if (!attachment || !attachment.name.endsWith('.json')) {
+        await interaction.reply({ 
+          content: '❌ Please upload a valid JSON file!', 
+          ephemeral: true 
+        });
+        return;
+      }
+
+      // Download and parse the file
+      const response = await fetch(attachment.url);
+      const jsonContent = await response.text();
+      const importData = JSON.parse(jsonContent);
+
+      // Validate the data structure
+      if (!importData.users || typeof importData.users !== 'object') {
+        await interaction.reply({ 
+          content: '❌ Invalid data format! The file must contain user data.', 
+          ephemeral: true 
+        });
+        return;
+      }
+
+      // Import users
+      let importedCount = 0;
+      let updatedCount = 0;
+      
+      for (const [userId, userData] of Object.entries(importData.users)) {
+        const existingUser = this.storage.getUserData(userId);
+        if (existingUser) {
+          updatedCount++;
+        } else {
+          importedCount++;
+        }
+        this.storage.saveUserData(userId, userData as any);
+      }
+
+      // Import global state if available
+      if (importData.globalState) {
+        this.storage.saveGlobalState(importData.globalState);
+      }
+
+      // Import config if available
+      if (importData.config) {
+        // Note: Config import would need to be implemented in StorageManager
+        console.log('Config import not yet implemented');
+      }
+
+      await interaction.reply({ 
+        content: `✅ **Data Import Complete!**\n\n• **Imported:** ${importedCount} new users\n• **Updated:** ${updatedCount} existing users\n• **Total Users:** ${Object.keys(importData.users).length}\n\n**Note:** This operation has overwritten existing data.`, 
+        ephemeral: true 
+      });
+
+      console.log(`📥 Admin ${context.user.username} imported data: ${importedCount} new, ${updatedCount} updated users`);
+    } catch (error) {
+      console.error('Error importing data:', error);
+      await interaction.reply({ 
+        content: '❌ Failed to import data. Please check the file format and try again.', 
         ephemeral: true 
       });
     }
