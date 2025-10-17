@@ -7,6 +7,15 @@ import * as dotenv from 'dotenv';
 // Load environment variables
 dotenv.config();
 
+// Prevent local running unless explicitly enabled
+if (!process.env.RAILWAY_ENVIRONMENT && !process.env.ENABLE_LOCAL_BOT) {
+  console.log('❌ LOCAL BOT DISABLED');
+  console.log('🚀 This bot is configured to run only on Railway');
+  console.log('💡 To enable local development, set ENABLE_LOCAL_BOT=true in your .env file');
+  console.log('📊 Railway bot is running at: https://railway.app');
+  process.exit(0);
+}
+
 class SparkBot {
   private client: Client;
   private commandManager: CommandManager;
