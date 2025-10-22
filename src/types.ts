@@ -10,6 +10,8 @@ export interface UserData {
   inviteData: InviteData;
   reactionData: UserReactionData;
   gmCooldown?: number; // Timestamp of last GM reward (for 24-hour cooldown)
+  twitterHandle?: string; // User's Twitter handle (global, not per wallet)
+  lastLootBoxOpen?: number; // Timestamp of last lootbox opening (for 30-second cooldown)
 }
 
 // Individual wallet structure
@@ -23,10 +25,8 @@ export interface UserWallet {
 // Inventory system
 export interface Inventory {
   lootBoxes: number;
-  gtdWhitelist: number;
-  fcfsWhitelist: number;
   airdropAllocations: number;
-  sparkTokens: number; // Combined $Stone tokens (10 + 20)
+  sparkTokens: number; // Combined $Stone tokens (20, 50, 100, 500, 1000, 4444)
 }
 
 
@@ -41,14 +41,15 @@ export interface InviteData {
 
 // Loot box system
 export interface LootBoxReward {
-  type: 'gtd_whitelist' | 'fcfs_whitelist' | 'airdrop' | 'spark_tokens';
+  type: 'airdrop' | 'spark_tokens';
   name: string;
   description: string;
   inventoryImage: string;
   openingImage: string;
+  imageUrl: string; // Image URL for lootbox opening display
   probability: number;
-  tokenAmount?: number; // Amount of $Stone tokens to give (10 or 20) - only for spark_tokens type
-  maxQuantity?: number; // For airdrop (20 max)
+  tokenAmount?: number; // Amount of $Stone tokens to give (20, 50, 100, 500, 1000, 4444) - only for spark_tokens type
+  maxQuantity?: number; // For airdrop (100 max)
 }
 
 // Global state

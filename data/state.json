@@ -1,51 +1,62 @@
 {
-  "totalAirdropsGiven": 0,
-  "maxAirdrops": 100,
   "lootBoxRewards": [
     {
-      "type": "gtd_whitelist",
-      "name": "GTD Whitelist",
-      "description": "Guaranteed whitelist allocation",
-      "inventoryImage": "https://i.imgur.com/ovoJNRN.jpeg",
-      "openingImage": "https://i.imgur.com/ovoJNRN.jpeg",
-      "probability": 0.2
+      "type": "spark_tokens",
+      "tokenAmount": 20,
+      "probability": 0.4,
+      "imageUrl": "https://i.imgur.com/uC9vkfX.jpeg",
+      "name": "20 $Stone Tokens",
+      "description": "20 $Stone tokens"
     },
     {
-      "type": "fcfs_whitelist",
-      "name": "FCFS Whitelist",
-      "description": "First come first serve whitelist allocation",
-      "inventoryImage": "https://i.imgur.com/5JrpGWR.jpeg",
-      "openingImage": "https://i.imgur.com/5JrpGWR.jpeg",
-      "probability": 0.5
+      "type": "spark_tokens",
+      "tokenAmount": 50,
+      "probability": 0.3,
+      "imageUrl": "https://i.imgur.com/e8N1Kf0.jpeg",
+      "name": "50 $Stone Tokens",
+      "description": "50 $Stone tokens"
+    },
+    {
+      "type": "spark_tokens",
+      "tokenAmount": 100,
+      "probability": 0.2,
+      "imageUrl": "https://i.imgur.com/HdjJ3ck.jpeg",
+      "name": "100 $Stone Tokens",
+      "description": "100 $Stone tokens"
+    },
+    {
+      "type": "spark_tokens",
+      "tokenAmount": 500,
+      "probability": 0.05,
+      "imageUrl": "https://i.imgur.com/8NMrJ1T.jpeg",
+      "name": "500 $Stone Tokens",
+      "description": "500 $Stone tokens"
+    },
+    {
+      "type": "spark_tokens",
+      "tokenAmount": 1000,
+      "probability": 0.03,
+      "imageUrl": "https://i.imgur.com/fdS8Mnj.jpeg",
+      "name": "1000 $Stone Tokens",
+      "description": "1000 $Stone tokens"
     },
     {
       "type": "airdrop",
+      "tokenAmount": 0,
+      "probability": 0.01,
+      "imageUrl": "https://i.imgur.com/PLACEHOLDER_AIRDROP.jpeg",
       "name": "Airdrop Allocation",
-      "description": "Airdrop allocation",
-      "inventoryImage": "https://i.imgur.com/w00So6j.jpeg",
-      "openingImage": "https://i.imgur.com/XMpG5Lp.jpeg",
-      "probability": 0.03,
-      "maxQuantity": 100
+      "description": "Airdrop allocation"
     },
     {
       "type": "spark_tokens",
-      "name": "10 $Stone Tokens",
-      "description": "10 $Stone tokens",
-      "inventoryImage": "https://i.imgur.com/2sDdiFi.jpeg",
-      "openingImage": "https://i.imgur.com/2sDdiFi.jpeg",
-      "probability": 0.17,
-      "tokenAmount": 10
-    },
-    {
-      "type": "spark_tokens",
-      "name": "20 $Stone Tokens",
-      "description": "20 $Stone tokens",
-      "inventoryImage": "https://i.imgur.com/uC9vkfX.jpeg",
-      "openingImage": "https://i.imgur.com/uC9vkfX.jpeg",
-      "probability": 0.1,
-      "tokenAmount": 20
+      "tokenAmount": 4444,
+      "probability": 0.01,
+      "imageUrl": "https://i.imgur.com/x4s3EoU.jpeg",
+      "name": "4444 $Stone Tokens",
+      "description": "4444 $Stone tokens"
     }
   ],
-  "globalAirdropLimit": 100,
-  "totalAirdropsDistributed": 0
+  "totalAirdropsDistributed": 0,
+  "globalAirdropLimit": 100
 }

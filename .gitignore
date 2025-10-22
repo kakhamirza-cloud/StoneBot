@@ -96,3 +96,6 @@ Thumbs.db
 # Data files (optional - you might want to keep these for backup)
 # Uncomment the next line if you want to exclude data files
 # data/*.json
+
+# Backup files
+data/backups/

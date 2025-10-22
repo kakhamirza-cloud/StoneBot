@@ -17,7 +17,7 @@ export class LootBoxManager {
       return null;
     }
 
-    const activeWallet = this.storage.getWallet(userData, walletId);
+    const activeWallet = this.storage.getActiveWallet(userData);
     if (!activeWallet || activeWallet.inventory.lootBoxes === 0) {
       return null;
     }
@@ -25,13 +25,11 @@ export class LootBoxManager {
     const globalState = this.storage.getGlobalState();
     
     // Check if user can get certain rewards based on their current wallet's items
-    const canGetGTD = activeWallet.inventory.gtdWhitelist < 1;
-    const canGetFCFS = activeWallet.inventory.fcfsWhitelist < 1;
     const canGetAirdrop = activeWallet.inventory.airdropAllocations < 1 && 
                          globalState.totalAirdropsDistributed < globalState.globalAirdropLimit;
     
-    // If user has all items, they can only get $Stone tokens
-    if (!canGetGTD && !canGetFCFS && !canGetAirdrop) {
+    // If user has airdrop allocation, they can only get $Stone tokens
+    if (!canGetAirdrop) {
       const sparkTokenReward = this.selectSparkTokenReward(globalState);
       if (sparkTokenReward) {
         this.giveReward(userId, sparkTokenReward, globalState, walletId);
@@ -39,7 +37,7 @@ export class LootBoxManager {
       }
     }
 
-    const reward = this.selectRandomReward(globalState, canGetGTD, canGetFCFS, canGetAirdrop);
+    const reward = this.selectRandomReward(globalState, canGetAirdrop);
 
     if (!reward) {
       return null;
@@ -60,14 +58,10 @@ export class LootBoxManager {
   /**
    * Select a random reward based on probabilities
    */
-  private selectRandomReward(globalState: GlobalState, canGetGTD: boolean = true, canGetFCFS: boolean = true, canGetAirdrop: boolean = true): LootBoxReward | null {
+  private selectRandomReward(globalState: GlobalState, canGetAirdrop: boolean = true): LootBoxReward | null {
     // Filter rewards based on availability
     const availableRewards = globalState.lootBoxRewards.filter(reward => {
       switch (reward.type) {
-        case 'gtd_whitelist':
-          return canGetGTD;
-        case 'fcfs_whitelist':
-          return canGetFCFS;
         case 'airdrop':
           return canGetAirdrop;
         case 'spark_tokens':
@@ -155,7 +149,7 @@ export class LootBoxManager {
     const userData = this.storage.getUserData(userId);
     if (!userData) return;
 
-    const targetWallet = this.storage.getWallet(userData, walletId);
+    const targetWallet = this.storage.getActiveWallet(userData);
     if (!targetWallet) return;
 
     // Remove one loot box from the target wallet
@@ -163,12 +157,6 @@ export class LootBoxManager {
 
     // Add the reward to the target wallet's inventory
     switch (reward.type) {
-      case 'gtd_whitelist':
-        targetWallet.inventory.gtdWhitelist = Math.min(targetWallet.inventory.gtdWhitelist + 1, 1);
-        break;
-      case 'fcfs_whitelist':
-        targetWallet.inventory.fcfsWhitelist = Math.min(targetWallet.inventory.fcfsWhitelist + 1, 1);
-        break;
       case 'airdrop':
         targetWallet.inventory.airdropAllocations = Math.min(targetWallet.inventory.airdropAllocations + 1, 1);
         break;
@@ -223,7 +211,7 @@ export class LootBoxManager {
     const userData = this.storage.getUserData(userId);
     if (!userData) return 0;
     
-    const wallet = this.storage.getWallet(userData, walletId);
+    const wallet = this.storage.getActiveWallet(userData);
     return wallet?.inventory.lootBoxes || 0;
   }
 
@@ -234,8 +222,6 @@ export class LootBoxManager {
     totalItems: number;
     breakdown: {
       lootBoxes: number;
-      gtdWhitelist: number;
-      fcfsWhitelist: number;
       airdropAllocations: number;
       sparkTokens: number;
     };
@@ -246,22 +232,18 @@ export class LootBoxManager {
         totalItems: 0,
         breakdown: {
           lootBoxes: 0,
-          gtdWhitelist: 0,
-          fcfsWhitelist: 0,
           airdropAllocations: 0,
           sparkTokens: 0
         }
       };
     }
 
-    const wallet = this.storage.getWallet(userData, walletId);
+    const wallet = this.storage.getActiveWallet(userData);
     if (!wallet) {
       return {
         totalItems: 0,
         breakdown: {
           lootBoxes: 0,
-          gtdWhitelist: 0,
-          fcfsWhitelist: 0,
           airdropAllocations: 0,
           sparkTokens: 0
         }

@@ -2,6 +2,7 @@ import { Client, GatewayIntentBits, Events, Collection } from 'discord.js';
 import { CommandManager } from './commands';
 import { StorageManager } from './storage';
 import { PointManager } from './points';
+import { TwitterValidator } from './twitter-validator';
 import * as dotenv from 'dotenv';
 
 // Load environment variables
@@ -149,6 +150,77 @@ class SparkBot {
     }
   }
 
+  private async handleTwitterLinkMonitoring(message: any): Promise<void> {
+    try {
+      const messageContent = message.content;
+      console.log(`🔍 Checking message from ${message.author.username} in channel ${message.channel.id}: "${messageContent}"`);
+      
+      // Check if message contains Twitter/X URLs
+      const twitterUrls = this.extractTwitterUrls(messageContent);
+      console.log(`🔗 Found ${twitterUrls.length} Twitter URLs:`, twitterUrls);
+      
+      if (twitterUrls.length === 0) return;
+      
+      // Send notification to the designated channel
+      const notificationChannelId = '1427379036841054258';
+      const userToTag = '1246080513417023498';
+      
+      console.log(`📢 Attempting to send notification to channel ${notificationChannelId}`);
+      
+      const channel = message.client.channels.cache.get(notificationChannelId);
+      if (channel && 'send' in channel) {
+        const twitterLinks = twitterUrls.map(url => `🔗 ${url}`).join('\n');
+        
+        const notificationMessage = `**Twitter Link Detected!**\n\n**Posted by:** ${message.author.username} (${message.author.id})\n**Channel:** <#${message.channel.id}>\n**Links:**\n${twitterLinks}\n\n<@${userToTag}> please check these Twitter links.`;
+        
+        await (channel as any).send(notificationMessage);
+        
+        console.log(`🐦 Twitter link notification sent for ${twitterUrls.length} link(s) from ${message.author.username}`);
+      } else {
+        console.error(`❌ Could not find notification channel ${notificationChannelId} or channel doesn't support sending messages`);
+      }
+      
+    } catch (error) {
+      console.error('Error handling Twitter link monitoring:', error);
+    }
+  }
+
+  private extractTwitterUrls(text: string): string[] {
+    const urls: string[] = [];
+    
+    // Regex patterns for Twitter/X URLs - more comprehensive
+    const patterns = [
+      /https?:\/\/(?:www\.)?twitter\.com\/[a-zA-Z0-9_]+\/status\/\d+/g,
+      /https?:\/\/(?:www\.)?x\.com\/[a-zA-Z0-9_]+\/status\/\d+/g,
+      /https?:\/\/(?:www\.)?twitter\.com\/[a-zA-Z0-9_]+/g,
+      /https?:\/\/(?:www\.)?x\.com\/[a-zA-Z0-9_]+/g,
+      /https?:\/\/t\.co\/[a-zA-Z0-9]+/g,
+      // Additional patterns for better detection
+      /twitter\.com\/[a-zA-Z0-9_]+\/status\/\d+/g,
+      /x\.com\/[a-zA-Z0-9_]+\/status\/\d+/g,
+      /twitter\.com\/[a-zA-Z0-9_]+/g,
+      /x\.com\/[a-zA-Z0-9_]+/g,
+      /t\.co\/[a-zA-Z0-9]+/g
+    ];
+    
+    for (const pattern of patterns) {
+      const matches = text.match(pattern);
+      if (matches) {
+        // Add https:// prefix if missing
+        const fullUrls = matches.map(url => {
+          if (!url.startsWith('http')) {
+            return `https://${url}`;
+          }
+          return url;
+        });
+        urls.push(...fullUrls);
+      }
+    }
+    
+    // Remove duplicates
+    return [...new Set(urls)];
+  }
+
   private async handleReactionAdd(reaction: any, user: any): Promise<void> {
     try {
       // Ignore bot reactions
@@ -205,6 +277,15 @@ class SparkBot {
     try {
       // Ignore bot messages
       if (message.author.bot) return;
+
+      console.log(`📝 Message received from ${message.author.username} in channel ${message.channel.id}`);
+
+      // Check for Twitter links in monitoring channel
+      const twitterMonitoringChannelId = '1422957619181523099';
+      if (message.channel.id === twitterMonitoringChannelId) {
+        console.log(`🐦 Twitter monitoring channel detected! Processing message...`);
+        await this.handleTwitterLinkMonitoring(message);
+      }
 
       // Check if message is in the GM channel
       const gmChannelId = process.env.GM_CHANNEL_ID;

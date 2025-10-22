@@ -96,8 +96,6 @@ export class CommandManager {
               .setDescription('Item type to add')
               .setRequired(true)
               .addChoices(
-                { name: 'GTD Whitelist', value: 'gtd_whitelist' },
-                { name: 'FCFS Whitelist', value: 'fcfs_whitelist' },
                 { name: 'Airdrop Allocation', value: 'airdrop' },
                 { name: '$Stone Tokens', value: 'spark_tokens' }
               )
@@ -287,12 +285,23 @@ export class CommandManager {
   }
 
   private async handleInventory(interaction: CommandInteraction, context: CommandContext): Promise<void> {
-    // Check if user has wallet addresses in their active wallet
+    // Check what the user needs to submit
     const activeWallet = this.storage.getActiveWallet(context.userData);
-    if (!activeWallet.sparkWalletAddress || !activeWallet.taprootWalletAddress) {
-      // Show wallet submission modal
+    const hasSparkWallet = !!activeWallet.sparkWalletAddress;
+    const hasTaprootWallet = !!activeWallet.taprootWalletAddress;
+    const hasTwitterHandle = !!context.userData.twitterHandle;
+    
+    console.log(`📝 User ${context.user.username} inventory check:`);
+    console.log(`   Spark: ${hasSparkWallet ? 'Set' : 'Missing'}`);
+    console.log(`   Taproot: ${hasTaprootWallet ? 'Set' : 'Missing'}`);
+    console.log(`   Twitter: ${hasTwitterHandle ? 'Set' : 'Missing'}`);
+
+    // If missing wallets, they must submit wallets first
+    if (!hasSparkWallet || !hasTaprootWallet) {
+      console.log(`🔒 User ${context.user.username} needs to submit wallet addresses first`);
+      
       const modal = new ModalBuilder()
-        .setCustomId('wallet_modal')
+        .setCustomId('wallet_modal_v2')
         .setTitle('Submit Wallet Addresses');
 
       const sparkWalletInput = new TextInputBuilder()
@@ -309,10 +318,41 @@ export class CommandManager {
         .setPlaceholder('Enter your Taproot wallet address')
         .setRequired(true);
 
+      const twitterHandleInput = new TextInputBuilder()
+        .setCustomId('twitter_handle')
+        .setLabel('Twitter Handle')
+        .setStyle(TextInputStyle.Short)
+        .setPlaceholder('Enter your Twitter handle (e.g., @username)')
+        .setRequired(true);
+
       const sparkRow = new ActionRowBuilder<TextInputBuilder>().addComponents(sparkWalletInput);
       const taprootRow = new ActionRowBuilder<TextInputBuilder>().addComponents(taprootWalletInput);
+      const twitterRow = new ActionRowBuilder<TextInputBuilder>().addComponents(twitterHandleInput);
       
-      modal.addComponents(sparkRow, taprootRow);
+      modal.addComponents(sparkRow, taprootRow, twitterRow);
+
+      await interaction.showModal(modal);
+      return;
+    }
+
+    // If has wallets but missing Twitter handle, they need to submit Twitter only
+    if (!hasTwitterHandle) {
+      console.log(`🐦 User ${context.user.username} has wallets but needs Twitter handle`);
+      
+      const modal = new ModalBuilder()
+        .setCustomId('twitter_only_modal_v2')
+        .setTitle('Submit Twitter Handle');
+
+      const twitterHandleInput = new TextInputBuilder()
+        .setCustomId('twitter_handle')
+        .setLabel('Twitter Handle')
+        .setStyle(TextInputStyle.Short)
+        .setPlaceholder('Enter your Twitter handle (e.g., @username)')
+        .setRequired(true);
+
+      const twitterRow = new ActionRowBuilder<TextInputBuilder>().addComponents(twitterHandleInput);
+      
+      modal.addComponents(twitterRow);
 
       await interaction.showModal(modal);
       return;
@@ -336,8 +376,8 @@ export class CommandManager {
     const userAvatarUrl = context.user.displayAvatarURL({ size: 128 });
     
     const embed = new EmbedBuilder()
-      .setTitle(`📦 ${displayName}'s Inventory - Wallet ${context.userData.activeWallet}`)
-      .setDescription(`**Spark Wallet:** \`${maskedSparkWallet}\`\n**Taproot Wallet:** \`${maskedTaprootWallet}\`\n**Points:** ${context.userData.points}`)
+      .setTitle(`📦 ${displayName}'s Inventory`)
+      .setDescription(`**Spark Wallet:** \`${maskedSparkWallet}\`\n**Taproot Wallet:** \`${maskedTaprootWallet}\`\n**Twitter Handle:** @${context.userData.twitterHandle || 'Not set'}\n**Points:** ${context.userData.points}`)
       .setThumbnail(userAvatarUrl)
       .setColor(0x00FF00)
       .setTimestamp();
@@ -350,8 +390,6 @@ export class CommandManager {
     
     const items = [
       { name: '<:lootbox:1427361328808595537> Loot Boxes', value: (inventory.lootBoxes || 0).toString() },
-      { name: '<:GTD:1427361313360969931> GTD Whitelist', value: (inventory.gtdWhitelist || 0).toString() },
-      { name: '<:FCFS:1427361295832711280> FCFS Whitelist', value: (inventory.fcfsWhitelist || 0).toString() },
       { name: '<:airdropinventory:1427361277109469214> Airdrop Allocations', value: (inventory.airdropAllocations || 0).toString() },
       { name: '<:stonealloc10:1427361220897275924> $Stone Tokens', value: sparkTokens.toString() }
     ];
@@ -360,54 +398,7 @@ export class CommandManager {
       embed.addFields({ name: item.name, value: item.value, inline: true });
     });
 
-    // Create components
-    const components = [];
-
-    // Wallet selection dropdown
-    const walletSelect = new StringSelectMenuBuilder()
-      .setCustomId('wallet_select')
-      .setPlaceholder(`Select Wallet (Currently: Wallet ${context.userData.activeWallet})`);
-
-    for (let i = 1; i <= context.userData.wallets.length; i++) {
-      walletSelect.addOptions({
-        label: `Wallet ${i}`,
-        value: i.toString(),
-        description: i === context.userData.activeWallet ? 'Currently Active' : 'Click to switch'
-      });
-    }
-
-    const walletRow = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(walletSelect);
-    components.push(walletRow);
-
-    // Wallet unlock button (only show for the last wallet if it has requirements met)
-    const globalState = this.storage.getGlobalState();
-    const lastWallet = context.userData.wallets[context.userData.wallets.length - 1];
-    const hasGTD = lastWallet.inventory.gtdWhitelist >= 1;
-    const hasFCFS = lastWallet.inventory.fcfsWhitelist >= 1;
-    const hasAirdrop = lastWallet.inventory.airdropAllocations >= 1;
-    
-    // Check if last wallet can unlock the next one
-    let canUnlockNext = false;
-    if (globalState.totalAirdropsDistributed >= globalState.globalAirdropLimit) {
-      canUnlockNext = hasGTD && hasFCFS;
-    } else {
-      canUnlockNext = hasGTD && hasFCFS && hasAirdrop;
-    }
-    
-    const nextWalletId = context.userData.wallets.length + 1;
-
-    // Only show unlock button if user is viewing the last wallet, it can unlock the next one, and hasn't reached the 10 wallet limit
-    if (canUnlockNext && context.userData.activeWallet === context.userData.wallets.length && context.userData.wallets.length < 10) {
-      const unlockButton = new ButtonBuilder()
-        .setCustomId(`unlock_wallet_${nextWalletId}`)
-        .setLabel(`Unlock Wallet ${nextWalletId}`)
-        .setStyle(ButtonStyle.Success);
-
-      const unlockRow = new ActionRowBuilder<ButtonBuilder>().addComponents(unlockButton);
-      components.push(unlockRow);
-    }
-
-    await interaction.reply({ embeds: [embed], components });
+    await interaction.reply({ embeds: [embed] });
   }
 
   private async updateInventoryDisplay(interaction: any, context: CommandContext): Promise<void> {
@@ -424,8 +415,8 @@ export class CommandManager {
     const userAvatarUrl = context.user.displayAvatarURL({ size: 128 });
     
     const embed = new EmbedBuilder()
-      .setTitle(`📦 ${displayName}'s Inventory - Wallet ${context.userData.activeWallet}`)
-      .setDescription(`**Spark Wallet:** \`${maskedSparkWallet}\`\n**Taproot Wallet:** \`${maskedTaprootWallet}\`\n**Points:** ${context.userData.points}`)
+      .setTitle(`📦 ${displayName}'s Inventory`)
+      .setDescription(`**Spark Wallet:** \`${maskedSparkWallet}\`\n**Taproot Wallet:** \`${maskedTaprootWallet}\`\n**Twitter Handle:** @${context.userData.twitterHandle || 'Not set'}\n**Points:** ${context.userData.points}`)
       .setThumbnail(userAvatarUrl)
       .setColor(0x00FF00)
       .setTimestamp();
@@ -438,8 +429,6 @@ export class CommandManager {
     
     const items = [
       { name: '<:lootbox:1427361328808595537> Loot Boxes', value: (inventory.lootBoxes || 0).toString() },
-      { name: '<:GTD:1427361313360969931> GTD Whitelist', value: (inventory.gtdWhitelist || 0).toString() },
-      { name: '<:FCFS:1427361295832711280> FCFS Whitelist', value: (inventory.fcfsWhitelist || 0).toString() },
       { name: '<:airdropinventory:1427361277109469214> Airdrop Allocations', value: (inventory.airdropAllocations || 0).toString() },
       { name: '<:stonealloc10:1427361220897275924> $Stone Tokens', value: sparkTokens.toString() }
     ];
@@ -470,16 +459,14 @@ export class CommandManager {
     // Wallet unlock button (only show for the last wallet if it has requirements met)
     const globalState = this.storage.getGlobalState();
     const lastWallet = context.userData.wallets[context.userData.wallets.length - 1];
-    const hasGTD = lastWallet.inventory.gtdWhitelist >= 1;
-    const hasFCFS = lastWallet.inventory.fcfsWhitelist >= 1;
     const hasAirdrop = lastWallet.inventory.airdropAllocations >= 1;
     
     // Check if last wallet can unlock the next one
     let canUnlockNext = false;
     if (globalState.totalAirdropsDistributed >= globalState.globalAirdropLimit) {
-      canUnlockNext = hasGTD && hasFCFS;
+      canUnlockNext = true; // Can always unlock when airdrop limit reached
     } else {
-      canUnlockNext = hasGTD && hasFCFS && hasAirdrop;
+      canUnlockNext = hasAirdrop;
     }
     
     const nextWalletId = context.userData.wallets.length + 1;
@@ -500,6 +487,19 @@ export class CommandManager {
   }
 
   private async handleOpenLootBox(interaction: CommandInteraction, context: CommandContext): Promise<void> {
+    // Check 30-second cooldown
+    const now = Date.now();
+    const cooldownTime = 30 * 1000; // 30 seconds in milliseconds
+    
+    if (context.userData.lastLootBoxOpen && (now - context.userData.lastLootBoxOpen) < cooldownTime) {
+      const remainingTime = Math.ceil((cooldownTime - (now - context.userData.lastLootBoxOpen)) / 1000);
+      await interaction.reply({ 
+        content: `⏰ **Cooldown Active!**\n\nYou can open another lootbox in **${remainingTime} seconds**.`, 
+        ephemeral: true 
+      });
+      return;
+    }
+
     const activeWallet = this.storage.getActiveWallet(context.userData);
     
     if (activeWallet.inventory.lootBoxes === 0) {
@@ -540,21 +540,15 @@ export class CommandManager {
     });
 
     // Add specific image based on reward type
-    if (reward.type === 'fcfs_whitelist') {
-      embed.setImage('https://i.imgur.com/5JrpGWR.jpeg');
-    } else if (reward.type === 'gtd_whitelist') {
-      embed.setImage('https://i.imgur.com/ovoJNRN.jpeg');
-    } else if (reward.type === 'airdrop') {
-      embed.setImage('https://i.imgur.com/XMpG5Lp.jpeg');
-    } else if (reward.type === 'spark_tokens') {
-      if (reward.tokenAmount === 10) {
-        embed.setImage('https://i.imgur.com/2sDdiFi.jpeg');
-      } else if (reward.tokenAmount === 20) {
-        embed.setImage('https://i.imgur.com/uC9vkfX.jpeg');
-      }
+    if (reward.imageUrl) {
+      embed.setImage(reward.imageUrl);
     }
 
     await interaction.reply({ embeds: [embed] });
+
+    // Update cooldown timestamp
+    context.userData.lastLootBoxOpen = now;
+    this.storage.saveUserData(context.userId, context.userData);
 
     // Send airdrop notifications if user received an airdrop allocation
     if (reward.type === 'airdrop') {
@@ -631,42 +625,60 @@ export class CommandManager {
     }
 
     const allUsers = this.storage.getAllUsers();
+    const guild = interaction.guild;
     
-    // Create CSV header
-    const maxWallets = Math.max(...Object.values(allUsers).map(user => user.wallets.length), 1);
-    let csvHeader = 'User ID,Username';
-    
-    // Add columns for each wallet
-    for (let i = 1; i <= maxWallets; i++) {
-      csvHeader += `,W${i}_Spark,W${i}_Taproot,W${i}_LootBoxes,W${i}_GTD,W${i}_FCFS,W${i}_Airdrop,W${i}_SparkTokens`;
+    if (!guild) {
+      await interaction.reply({ 
+        content: '❌ This command can only be used in a server!', 
+        ephemeral: true 
+      });
+      return;
     }
+
+    // Define role IDs and their names
+    const roles = [
+      { id: '1423578897638752366', name: 'Role 1423578897638752366' },
+      { id: '1422926053210325043', name: 'Role 1422926053210325043' }
+    ];
     
-    // Create CSV rows
-    const csvRows = Object.entries(allUsers).map(([userId, userData]) => {
-      let row = `${userId},"${userData.username}"`;
+    // Create CSV content with separate sections for each role
+    const csvSections: string[] = [];
+    
+    // Process each role
+    for (const roleInfo of roles) {
+      const role = guild.roles.cache.get(roleInfo.id);
+      if (!role) continue;
       
-      // Add data for each wallet
-      for (let i = 1; i <= maxWallets; i++) {
-        const wallet = userData.wallets.find(w => w.walletId === i);
-        if (wallet) {
-          row += `,"${wallet.sparkWalletAddress || 'Not set'}","${wallet.taprootWalletAddress || 'Not set'}",${wallet.inventory.lootBoxes},${wallet.inventory.gtdWhitelist},${wallet.inventory.fcfsWhitelist},${wallet.inventory.airdropAllocations},${wallet.inventory.sparkTokens}`;
-        } else {
-          row += ',"Not set","Not set",0,0,0,0,0';
+      // Add role header
+      csvSections.push(`role ${roleInfo.id}`);
+      csvSections.push('User ID,Username,Spark Wallet,Taproot Wallet,Twitter Handle,LootBoxes,Airdrop Allocations,Stone Tokens');
+      
+      // Get members with this role
+      const membersWithRole = role.members.map(member => member.id);
+      
+      // Add users with this role
+      for (const userId of membersWithRole) {
+        const userData = allUsers[userId];
+        if (userData) {
+          const wallet = userData.wallets[0]; // Single wallet system
+          const row = `${userId},"${userData.username}","${wallet?.sparkWalletAddress || 'Not set'}","${wallet?.taprootWalletAddress || 'Not set'}","${userData.twitterHandle || 'Not set'}",${wallet?.inventory.lootBoxes || 0},${wallet?.inventory.airdropAllocations || 0},${wallet?.inventory.sparkTokens || 0}`;
+          csvSections.push(row);
         }
       }
       
-      return row;
-    });
+      // Add empty line between sections
+      csvSections.push('');
+    }
     
-    const csvContent = [csvHeader, ...csvRows].join('\n');
+    const csvContent = csvSections.join('\n');
 
     const attachment = new AttachmentBuilder(
       Buffer.from(csvContent, 'utf8'),
-      { name: 'wallets_with_inventory.csv' }
+      { name: 'wallets_sorted_by_roles.csv' }
     );
 
     await interaction.reply({ 
-      content: `📋 Exported ${Object.keys(allUsers).length} users with wallet addresses and inventory data:`,
+      content: `📋 Exported users organized by roles with wallet addresses and inventory data:`,
       files: [attachment],
       ephemeral: true 
     });
@@ -984,12 +996,6 @@ export class CommandManager {
     
     // Add items to active wallet
     switch (itemType) {
-      case 'gtd_whitelist':
-        activeWallet.inventory.gtdWhitelist = Math.min(activeWallet.inventory.gtdWhitelist + amount, 1);
-        break;
-      case 'fcfs_whitelist':
-        activeWallet.inventory.fcfsWhitelist = Math.min(activeWallet.inventory.fcfsWhitelist + amount, 1);
-        break;
       case 'airdrop':
         activeWallet.inventory.airdropAllocations = Math.min(activeWallet.inventory.airdropAllocations + amount, 1);
         // Update global airdrop counter
@@ -1022,12 +1028,12 @@ export class CommandManager {
 
     const embed = new EmbedBuilder()
       .setTitle('Welcome to the *Spark Stones ecosystem 💠')
-      .setDescription(`Our server has a Loot Box system where you can get GTD WL, FCFS WL, a Spark Stone airdrop, and an allocation of our $STONE token.
+      .setDescription(`Our server has a Loot Box system where you can get a Spark Stone airdrop and allocations of our $STONE token.
 
 Earn points by being active, inviting friends, participating in special events, and exchange your points for Loot Boxes.
 
 💰 **Point Earning System**
-🔗 Discord Invitations: Earn 10 $Stone Points for each successful invite
+🔗 Discord Invitations: Earn 5 $Stone Points for each successful invite
 🌅 GM Messages: Earn 1 $Stone Point for saying "gm" in the designated channel (once per 24 hours)
 📢 Announcement Reactions: Earn 1 $Stone Point per unique reaction on admin announcements
 🎁 Loot Box Rewards: Earn $Stone Tokens and other items from loot boxes
@@ -1036,20 +1042,26 @@ Earn points by being active, inviting friends, participating in special events, 
 Purchase: Buy loot boxes for 5 $Stone Points each
 Smart Rewards: Intelligent reward distribution based on wallet requirements
 Reward Types:
-🎫 GTD Whitelist (20% chance)
-🎫 FCFS Whitelist (50% chance)
-💰 Airdrop Allocation (3% chance, limited to 100 total)
-🪙 10 $Stone Tokens (17% chance)
-🪙 20 $Stone Tokens (10% chance)
+💰 Airdrop Allocation (1% chance, limited to 100 total)
+🪙 20 $Stone Tokens (40% chance)
+🪙 50 $Stone Tokens (30% chance)
+🪙 100 $Stone Tokens (20% chance)
+🪙 500 $Stone Tokens (5% chance)
+🪙 1000 $Stone Tokens (3% chance)
+🪙 4444 $Stone Tokens (1% chance)
 
 👥 **Commands**
 🔗 /invite - Get your personal invitation link to earn $Stone Points
-📦 /inventory - View your inventory and manage multiple wallets
+📦 /inventory - View your inventory and manage multiple wallets (requires Twitter handle)
 🎁 /buylootbox [quantity] - Buy loot boxes with your $Stone Points
 🎲 /openlootbox - Open your loot boxes to get rewards
 💰 /balance - Check your current $Stone Points balance
 🏦 /editwallet - Set or edit your wallet addresses
-❓ /help - View all available commands and information`)
+❓ /help - View all available commands and information
+
+📱 **Twitter Integration**
+🐦 Twitter handle required for inventory access
+🔍 Real Twitter accounts only (bot detection enabled)`)
       .setColor(0x00FF00)
       .setTimestamp();
 
@@ -1173,8 +1185,12 @@ Reward Types:
   async handleModal(interaction: any): Promise<void> {
     const customId = interaction.customId;
     
-    if (customId === 'wallet_modal') {
+    if (customId === 'twitter_modal') {
+      await this.handleTwitterModal(interaction);
+    } else if (customId === 'wallet_modal' || customId === 'wallet_modal_v2') {
       await this.handleWalletModal(interaction);
+    } else if (customId === 'twitter_only_modal' || customId === 'twitter_only_modal_v2') {
+      await this.handleTwitterOnlyModal(interaction);
     } else if (customId === 'editwallet_modal') {
       await this.handleEditWalletModal(interaction);
     } else if (customId === 'twitter_link_modal') {
@@ -1188,36 +1204,41 @@ Reward Types:
 
   // Button and select menu handlers
   async handleComponentInteraction(interaction: any): Promise<void> {
-    const customId = interaction.customId;
-    
-    if (customId === 'wallet_select') {
-      await this.handleWalletSelect(interaction);
-    } else if (customId.startsWith('unlock_wallet_')) {
-      await this.handleUnlockWallet(interaction);
-    }
+    // No component interactions needed for single wallet system
+    await interaction.reply({ 
+      content: '❌ This interaction is no longer supported.', 
+      ephemeral: true 
+    });
   }
 
-  private async handleWalletSelect(interaction: any): Promise<void> {
-    const selectedWalletId = parseInt(interaction.values[0]);
+
+
+  private async handleTwitterModal(interaction: any): Promise<void> {
+    const twitterHandle = interaction.fields.getTextInputValue('twitter_handle');
     const userId = interaction.user.id;
     
+    // Import TwitterValidator
+    const { TwitterValidator } = await import('./twitter-validator');
+    
+    // Validate the Twitter handle
+    const validation = await TwitterValidator.validateTwitterHandle(twitterHandle);
+    
+    if (!validation.isValid) {
+      await interaction.reply({ 
+        content: `❌ **Twitter Handle Validation Failed!**\n\n**Error:** ${validation.error}\n\nPlease try again with a valid Twitter handle.`, 
+        ephemeral: true 
+      });
+      return;
+    }
+    
+    // Get or create user data
     let userData = this.storage.getUserData(userId);
     if (!userData) {
       userData = this.storage.createUserData(userId, interaction.user.username);
     }
 
-    // Check if the selected wallet exists
-    const targetWallet = this.storage.getWallet(userData, selectedWalletId);
-    if (!targetWallet) {
-      await interaction.reply({ 
-        content: '❌ Wallet not found!', 
-        ephemeral: true 
-      });
-      return;
-    }
-
-    // Switch to the selected wallet
-    userData.activeWallet = selectedWalletId;
+    // Save the Twitter handle
+    userData.twitterHandle = twitterHandle.replace('@', '').trim();
     this.storage.saveUserData(userId, userData);
 
     // Create context for updated inventory
@@ -1228,89 +1249,42 @@ Reward Types:
       isAdmin: this.isAdmin(userId, interaction)
     };
 
-    // Update the inventory display live
-    await this.updateInventoryDisplay(interaction, context);
+    // Try to update the inventory display live, but handle errors gracefully
+    try {
+      await this.updateInventoryDisplay(interaction, context);
+    } catch (error) {
+      // If the original message is no longer available, just reply with success message
+      await interaction.reply({ 
+        content: `✅ Twitter handle **@${userData.twitterHandle}** saved successfully!`, 
+        ephemeral: true 
+      });
+    }
   }
-
-  private async handleUnlockWallet(interaction: any): Promise<void> {
-    const walletId = parseInt(interaction.customId.split('_')[2]);
-    const userId = interaction.user.id;
-    
-    let userData = this.storage.getUserData(userId);
-    if (!userData) {
-      userData = this.storage.createUserData(userId, interaction.user.username);
-    }
-
-    // Check if user can unlock this wallet
-    const globalState = this.storage.getGlobalState();
-    const canUnlock = this.storage.canUnlockNextWallet(userData, globalState);
-    
-    if (!canUnlock) {
-      await interaction.reply({ 
-        content: '❌ You don\'t meet the requirements to unlock this wallet!', 
-        ephemeral: true 
-      });
-      return;
-    }
-
-    // Check wallet limit (maximum 10 wallets)
-    if (userData.wallets.length >= 10) {
-      await interaction.reply({ 
-        content: '❌ You have reached the maximum limit of 10 wallets!', 
-        ephemeral: true 
-      });
-      return;
-    }
-
-    // Create the new wallet
-    const newWallet = this.storage.createNewWallet(userData);
-    if (!newWallet) {
-      await interaction.reply({ 
-        content: '❌ Cannot create more wallets. Maximum limit of 10 wallets reached!', 
-        ephemeral: true 
-      });
-      return;
-    }
-    
-    userData.activeWallet = newWallet.walletId;
-    this.storage.saveUserData(userId, userData);
-
-    // Show wallet setup modal for the new wallet
-    const modal = new ModalBuilder()
-      .setCustomId('wallet_modal')
-      .setTitle(`Submit Wallet Addresses - Wallet ${newWallet.walletId}`);
-
-    const sparkWalletInput = new TextInputBuilder()
-      .setCustomId('spark_wallet')
-      .setLabel('Spark Wallet Address')
-      .setStyle(TextInputStyle.Short)
-      .setPlaceholder('Enter your Spark wallet address')
-      .setRequired(true);
-
-    const taprootWalletInput = new TextInputBuilder()
-      .setCustomId('taproot_wallet')
-      .setLabel('Taproot Wallet Address')
-      .setStyle(TextInputStyle.Short)
-      .setPlaceholder('Enter your Taproot wallet address')
-      .setRequired(true);
-
-    const sparkRow = new ActionRowBuilder<TextInputBuilder>().addComponents(sparkWalletInput);
-    const taprootRow = new ActionRowBuilder<TextInputBuilder>().addComponents(taprootWalletInput);
-    
-    modal.addComponents(sparkRow, taprootRow);
-
-    await interaction.showModal(modal);
-  }
-
 
   private async handleWalletModal(interaction: any): Promise<void> {
     const sparkWalletAddress = interaction.fields.getTextInputValue('spark_wallet');
     const taprootWalletAddress = interaction.fields.getTextInputValue('taproot_wallet');
+    const twitterHandle = interaction.fields.getTextInputValue('twitter_handle');
     const userId = interaction.user.id;
     
     let userData = this.storage.getUserData(userId);
     if (!userData) {
       userData = this.storage.createUserData(userId, interaction.user.username);
+    }
+
+    // Validate Twitter handle
+    const cleanTwitterHandle = twitterHandle.replace('@', '').trim();
+    if (!cleanTwitterHandle) {
+      await interaction.reply({ 
+        content: '❌ Please enter a valid Twitter handle!', 
+        ephemeral: true 
+      });
+      return;
+    }
+
+    // Update user data with Twitter handle (global) - only if not already set
+    if (!userData.twitterHandle) {
+      userData.twitterHandle = cleanTwitterHandle;
     }
 
     // Update the active wallet with the new addresses
@@ -1334,7 +1308,51 @@ Reward Types:
     } catch (error) {
       // If the original message is no longer available, just reply with success message
       await interaction.reply({ 
-        content: `✅ Wallet addresses saved for Wallet ${userData.activeWallet}!`, 
+        content: `✅ Wallet addresses and Twitter handle saved for Wallet ${userData.activeWallet}!`, 
+        ephemeral: true 
+      });
+    }
+  }
+
+  private async handleTwitterOnlyModal(interaction: any): Promise<void> {
+    const twitterHandle = interaction.fields.getTextInputValue('twitter_handle');
+    const userId = interaction.user.id;
+    
+    let userData = this.storage.getUserData(userId);
+    if (!userData) {
+      userData = this.storage.createUserData(userId, interaction.user.username);
+    }
+
+    // Validate Twitter handle
+    const cleanTwitterHandle = twitterHandle.replace('@', '').trim();
+    if (!cleanTwitterHandle) {
+      await interaction.reply({ 
+        content: '❌ Please enter a valid Twitter handle!', 
+        ephemeral: true 
+      });
+      return;
+    }
+
+    // Update user data with Twitter handle (global)
+    userData.twitterHandle = cleanTwitterHandle;
+    
+    this.storage.saveUserData(userId, userData);
+
+    // Create context for updated inventory
+    const context: CommandContext = {
+      user: interaction.user,
+      userId,
+      userData,
+      isAdmin: this.isAdmin(userId, interaction)
+    };
+
+    // Try to update the inventory display live, but handle errors gracefully
+    try {
+      await this.updateInventoryDisplay(interaction, context);
+    } catch (error) {
+      // If the original message is no longer available, just reply with success message
+      await interaction.reply({ 
+        content: `✅ Twitter handle saved! You can now access your inventory.`, 
         ephemeral: true 
       });
     }
@@ -1399,10 +1417,8 @@ Reward Types:
       {
         name: '🎁 **Loot Box Rewards**',
         value: [
-          '**GTD Whitelist** - Guaranteed whitelist allocation (20% chance)',
-          '**FCFS Whitelist** - First come first serve whitelist (50% chance)',
-          '**Airdrop Allocations** - Airdrop allocation (3% chance, Limited to 100 globally)',
-          '**$Stone Tokens** - 10 tokens (17% chance) or 20 tokens (10% chance)'
+          '**Airdrop Allocations** - Airdrop allocation (1% chance, Limited to 100 globally)',
+          '**$Stone Tokens** - 20 tokens (40% chance), 50 tokens (30% chance), 100 tokens (20% chance), 500 tokens (5% chance), 1000 tokens (3% chance), 4444 tokens (1% chance)'
         ].join('\n'),
         inline: false
       },
@@ -1410,7 +1426,7 @@ Reward Types:
         name: '👛 **Multi-Wallet System**',
         value: [
           '**Wallet 1:** Available to all users',
-          '**Wallet 2+:** Requires 1 GTD + 1 FCFS + 1 Airdrop (or 1 GTD + 1 FCFS if 100 airdrops distributed)',
+          '**Wallet 2+:** Requires 1 Airdrop allocation (or no requirements if 100 airdrops distributed)',
           '**Independent Inventories:** Each wallet has its own separate inventory',
           '**Wallet Switching:** Use the dropdown in `/inventory` to switch between wallets'
         ].join('\n'),
@@ -1419,12 +1435,14 @@ Reward Types:
       {
         name: '📝 **Important Notes**',
         value: [
-          '• Each wallet can hold max 1 GTD, 1 FCFS, and 1 Airdrop',
+          '• Each wallet can hold max 1 Airdrop allocation',
           '• Only 100 airdrops total across all users and wallets',
           '• Loot boxes cost 5 $Stone Points each',
           '• Invite links are permanent and unlimited use',
           '• Duplicate users joining = 0 points (no farming)',
-          '• Bot accounts joining = 0 points'
+          '• Bot accounts joining = 0 points',
+          '• Twitter handle required for inventory access',
+          '• Only real, non-bot Twitter accounts accepted'
         ].join('\n'),
         inline: false
       }
@@ -1806,9 +1824,7 @@ Reward Types:
   async handleButton(interaction: any): Promise<void> {
     const customId = interaction.customId;
     
-    if (customId.startsWith('unlock_wallet_')) {
-      await this.handleUnlockWallet(interaction);
-    } else if (customId.startsWith('panel_')) {
+    if (customId.startsWith('panel_')) {
       await this.handlePanelButton(interaction);
     }
     // Other button interactions can be added here

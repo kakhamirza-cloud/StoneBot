@@ -41,47 +41,74 @@ export class StorageManager {
         totalAirdropsDistributed: 0,
         lootBoxRewards: [
           {
-            type: 'gtd_whitelist',
-            name: 'GTD Whitelist',
-            description: 'Guaranteed whitelist allocation',
-            inventoryImage: 'https://i.imgur.com/ovoJNRN.jpeg',
-            openingImage: 'https://i.imgur.com/ovoJNRN.jpeg',
-            probability: 0.20
-          },
-          {
-            type: 'fcfs_whitelist',
-            name: 'FCFS Whitelist',
-            description: 'First come first serve whitelist allocation',
-            inventoryImage: 'https://i.imgur.com/5JrpGWR.jpeg',
-            openingImage: 'https://i.imgur.com/5JrpGWR.jpeg',
-            probability: 0.60
-          },
-          {
-            type: 'airdrop',
-            name: 'Airdrop Allocation',
-            description: 'Token airdrop allocation',
-            inventoryImage: 'https://i.imgur.com/w00So6j.jpeg',
-            openingImage: 'https://i.imgur.com/XMpG5Lp.jpeg',
-            probability: 0.03,
-            maxQuantity: 20
-          },
-          {
-            type: 'spark_tokens',
-            name: '10 $Stone Tokens',
-            description: '10 $Stone tokens',
-            inventoryImage: 'https://i.imgur.com/2sDdiFi.jpeg',
-            openingImage: 'https://i.imgur.com/2sDdiFi.jpeg',
-            probability: 0.10,
-            tokenAmount: 10
-          },
-          {
             type: 'spark_tokens',
             name: '20 $Stone Tokens',
             description: '20 $Stone tokens',
             inventoryImage: 'https://i.imgur.com/uC9vkfX.jpeg',
             openingImage: 'https://i.imgur.com/uC9vkfX.jpeg',
-            probability: 0.07,
+            imageUrl: 'https://i.imgur.com/uC9vkfX.jpeg',
+            probability: 0.40,
             tokenAmount: 20
+          },
+          {
+            type: 'spark_tokens',
+            name: '50 $Stone Tokens',
+            description: '50 $Stone tokens',
+            inventoryImage: 'https://i.imgur.com/PLACEHOLDER_50_TOKENS.jpeg',
+            openingImage: 'https://i.imgur.com/PLACEHOLDER_50_TOKENS.jpeg',
+            imageUrl: 'https://i.imgur.com/e8N1Kf0.jpeg',
+            probability: 0.30,
+            tokenAmount: 50
+          },
+          {
+            type: 'spark_tokens',
+            name: '100 $Stone Tokens',
+            description: '100 $Stone tokens',
+            inventoryImage: 'https://i.imgur.com/PLACEHOLDER_100_TOKENS.jpeg',
+            openingImage: 'https://i.imgur.com/PLACEHOLDER_100_TOKENS.jpeg',
+            imageUrl: 'https://i.imgur.com/HdjJ3ck.jpeg',
+            probability: 0.20,
+            tokenAmount: 100
+          },
+          {
+            type: 'spark_tokens',
+            name: '500 $Stone Tokens',
+            description: '500 $Stone tokens',
+            inventoryImage: 'https://i.imgur.com/PLACEHOLDER_500_TOKENS.jpeg',
+            openingImage: 'https://i.imgur.com/PLACEHOLDER_500_TOKENS.jpeg',
+            imageUrl: 'https://i.imgur.com/8NMrJ1T.jpeg',
+            probability: 0.05,
+            tokenAmount: 500
+          },
+          {
+            type: 'spark_tokens',
+            name: '1000 $Stone Tokens',
+            description: '1000 $Stone tokens',
+            inventoryImage: 'https://i.imgur.com/PLACEHOLDER_1000_TOKENS.jpeg',
+            openingImage: 'https://i.imgur.com/PLACEHOLDER_1000_TOKENS.jpeg',
+            imageUrl: 'https://i.imgur.com/fdS8Mnj.jpeg',
+            probability: 0.03,
+            tokenAmount: 1000
+          },
+          {
+            type: 'airdrop',
+            name: 'Airdrop Allocation',
+            description: 'Airdrop allocation',
+            inventoryImage: 'https://i.imgur.com/w00So6j.jpeg',
+            openingImage: 'https://i.imgur.com/PLACEHOLDER_AIRDROP.jpeg',
+            imageUrl: 'https://i.imgur.com/PLACEHOLDER_AIRDROP.jpeg',
+            probability: 0.01,
+            maxQuantity: 100
+          },
+          {
+            type: 'spark_tokens',
+            name: '4444 $Stone Tokens',
+            description: '4444 $Stone tokens',
+            inventoryImage: 'https://i.imgur.com/PLACEHOLDER_4444_TOKENS.jpeg',
+            openingImage: 'https://i.imgur.com/PLACEHOLDER_4444_TOKENS.jpeg',
+            imageUrl: 'https://i.imgur.com/x4s3EoU.jpeg',
+            probability: 0.01,
+            tokenAmount: 4444
           }
         ]
       };
@@ -134,8 +161,6 @@ export class StorageManager {
         walletId: 1,
         inventory: {
           lootBoxes: 0,
-          gtdWhitelist: 0,
-          fcfsWhitelist: 0,
           airdropAllocations: 0,
           sparkTokens: 0
         }
@@ -147,7 +172,9 @@ export class StorageManager {
         invitedUsers: []
       },
       reactionData: {},
-      gmCooldown: 0
+      gmCooldown: 0,
+      twitterHandle: undefined,
+      lastLootBoxOpen: undefined
     };
     
     this.saveUserData(userId, userData);
@@ -261,8 +288,6 @@ export class StorageManager {
         taprootWalletAddress: (userData as any).taprootWalletAddress,
         inventory: (userData as any).inventory || {
           lootBoxes: 0,
-          gtdWhitelist: 0,
-          fcfsWhitelist: 0,
           airdropAllocations: 0,
           sparkTokens: 0
         }
@@ -286,53 +311,6 @@ export class StorageManager {
     return userData.wallets.find(w => w.walletId === userData.activeWallet) || userData.wallets[0];
   }
 
-  getWallet(userData: UserData, walletId: number): UserWallet | null {
-    // Handle backward compatibility for existing users
-    if (!userData.wallets || userData.wallets.length === 0) {
-      // Convert old structure to new structure first
-      this.getActiveWallet(userData);
-    }
-    
-    return userData.wallets.find(w => w.walletId === walletId) || null;
-  }
-
-  createNewWallet(userData: UserData): UserWallet | null {
-    // Maximum wallet limit is 10
-    const MAX_WALLETS = 10;
-    
-    if (userData.wallets.length >= MAX_WALLETS) {
-      return null; // Cannot create more wallets
-    }
-    
-    const newWalletId = userData.wallets.length + 1;
-    const newWallet: UserWallet = {
-      walletId: newWalletId,
-      inventory: {
-        lootBoxes: 0,
-        gtdWhitelist: 0,
-        fcfsWhitelist: 0,
-        airdropAllocations: 0,
-        sparkTokens: 0
-      }
-    };
-    userData.wallets.push(newWallet);
-    return newWallet;
-  }
-
-  canUnlockNextWallet(userData: UserData, globalState: GlobalState): boolean {
-    const activeWallet = this.getActiveWallet(userData);
-    const hasGTD = activeWallet.inventory.gtdWhitelist >= 1;
-    const hasFCFS = activeWallet.inventory.fcfsWhitelist >= 1;
-    const hasAirdrop = activeWallet.inventory.airdropAllocations >= 1;
-    
-    // If global airdrop limit reached, only need GTD + FCFS
-    if (globalState.totalAirdropsDistributed >= globalState.globalAirdropLimit) {
-      return hasGTD && hasFCFS;
-    }
-    
-    // Otherwise need all three
-    return hasGTD && hasFCFS && hasAirdrop;
-  }
 
   // Backup methods
   createBackup(): string {
