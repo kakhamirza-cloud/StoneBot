@@ -150,7 +150,12 @@ export class CommandManager {
           option.setName('file')
             .setDescription('JSON file containing user data')
             .setRequired(true)
-        )
+        ),
+
+      new SlashCommandBuilder()
+        .setName('fixduplicatetwitter')
+        .setDescription('Fix duplicate Twitter handles by clearing duplicates (Admin only)')
+        .setDefaultMemberPermissions(8) // Administrator permission
     ];
   }
 
@@ -218,6 +223,9 @@ export class CommandManager {
           break;
         case 'import-data':
           await this.handleImportData(interaction, context);
+          break;
+        case 'fixduplicatetwitter':
+          await this.handleFixDuplicateTwitter(interaction, context);
           break;
         default:
           await interaction.reply({ content: 'Unknown command!', ephemeral: true });
@@ -1237,8 +1245,18 @@ Reward Types:
       userData = this.storage.createUserData(userId, interaction.user.username);
     }
 
+    // Check if Twitter handle is already taken by another user
+    const cleanTwitterHandle = twitterHandle.replace('@', '').trim();
+    if (this.storage.isTwitterHandleTaken(cleanTwitterHandle, userId)) {
+      await interaction.reply({ 
+        content: `❌ Twitter handle **@${cleanTwitterHandle}** is already taken by another user! Please use a different Twitter handle.`, 
+        ephemeral: true 
+      });
+      return;
+    }
+
     // Save the Twitter handle
-    userData.twitterHandle = twitterHandle.replace('@', '').trim();
+    userData.twitterHandle = cleanTwitterHandle;
     this.storage.saveUserData(userId, userData);
 
     // Create context for updated inventory
@@ -1277,6 +1295,15 @@ Reward Types:
     if (!cleanTwitterHandle) {
       await interaction.reply({ 
         content: '❌ Please enter a valid Twitter handle!', 
+        ephemeral: true 
+      });
+      return;
+    }
+
+    // Check if Twitter handle is already taken by another user
+    if (this.storage.isTwitterHandleTaken(cleanTwitterHandle, userId)) {
+      await interaction.reply({ 
+        content: `❌ Twitter handle **@${cleanTwitterHandle}** is already taken by another user! Please use a different Twitter handle.`, 
         ephemeral: true 
       });
       return;
@@ -1328,6 +1355,15 @@ Reward Types:
     if (!cleanTwitterHandle) {
       await interaction.reply({ 
         content: '❌ Please enter a valid Twitter handle!', 
+        ephemeral: true 
+      });
+      return;
+    }
+
+    // Check if Twitter handle is already taken by another user
+    if (this.storage.isTwitterHandleTaken(cleanTwitterHandle, userId)) {
+      await interaction.reply({ 
+        content: `❌ Twitter handle **@${cleanTwitterHandle}** is already taken by another user! Please use a different Twitter handle.`, 
         ephemeral: true 
       });
       return;
@@ -1896,5 +1932,85 @@ Reward Types:
       content: message, 
       ephemeral: true 
     });
+  }
+
+  /**
+   * Handle fix duplicate Twitter handles command
+   */
+  private async handleFixDuplicateTwitter(interaction: CommandInteraction, context: CommandContext): Promise<void> {
+    if (!context.isAdmin) {
+      await interaction.reply({ 
+        content: '🔒 This command is only available to administrators.', 
+        ephemeral: true 
+      });
+      return;
+    }
+
+    try {
+      const users = this.storage.getAllUsers();
+      const twitterHandleMap = new Map<string, string[]>(); // handle -> userIds
+      const duplicates: { handle: string; userIds: string[]; usernames: string[] }[] = [];
+
+      // Find all Twitter handles and group by handle
+      for (const [userId, userData] of Object.entries(users)) {
+        if (userData.twitterHandle) {
+          const handle = userData.twitterHandle.toLowerCase();
+          if (!twitterHandleMap.has(handle)) {
+            twitterHandleMap.set(handle, []);
+          }
+          twitterHandleMap.get(handle)!.push(userId);
+        }
+      }
+
+      // Find duplicates
+      for (const [handle, userIds] of twitterHandleMap.entries()) {
+        if (userIds.length > 1) {
+          const usernames = userIds.map(id => users[id]?.username || 'Unknown');
+          duplicates.push({ handle, userIds, usernames });
+        }
+      }
+
+      if (duplicates.length === 0) {
+        await interaction.reply({ 
+          content: '✅ **No duplicate Twitter handles found!** All handles are unique.', 
+          ephemeral: true 
+        });
+        return;
+      }
+
+      // Create backup before fixing
+      this.storage.createBackup();
+
+      // Fix duplicates by keeping the first user and clearing others
+      let fixedCount = 0;
+      for (const duplicate of duplicates) {
+        // Keep the first user, clear Twitter handle for others
+        for (let i = 1; i < duplicate.userIds.length; i++) {
+          const userId = duplicate.userIds[i];
+          const userData = users[userId];
+          if (userData) {
+            userData.twitterHandle = undefined;
+            this.storage.saveUserData(userId, userData);
+            fixedCount++;
+          }
+        }
+      }
+
+      const duplicateList = duplicates.map(d => 
+        `**@${d.handle}**: ${d.usernames.join(', ')}`
+      ).join('\n');
+
+      await interaction.reply({ 
+        content: `✅ **Duplicate Twitter Handles Fixed!**\n\n🔧 **Fixed:** ${fixedCount} duplicate handles\n\n📋 **Duplicates Found:**\n${duplicateList}\n\n💾 **Backup created** before fixing.`, 
+        ephemeral: true 
+      });
+
+    } catch (error) {
+      console.error('Error fixing duplicate Twitter handles:', error);
+      await interaction.reply({ 
+        content: '❌ Error fixing duplicate Twitter handles. Check console for details.', 
+        ephemeral: true 
+      });
+    }
   }
 }

@@ -235,6 +235,25 @@ export class StorageManager {
     }
   }
 
+  // Check if Twitter handle is already used by another user
+  isTwitterHandleTaken(twitterHandle: string, excludeUserId?: string): boolean {
+    const users = this.getAllUsers();
+    const cleanHandle = twitterHandle.replace('@', '').trim().toLowerCase();
+    
+    for (const [userId, userData] of Object.entries(users)) {
+      // Skip the user we're checking for (when updating existing user)
+      if (excludeUserId && userId === excludeUserId) {
+        continue;
+      }
+      
+      if (userData.twitterHandle && userData.twitterHandle.toLowerCase() === cleanHandle) {
+        return true;
+      }
+    }
+    
+    return false;
+  }
+
   // Export methods
   exportWallets(): { [userId: string]: string } {
     const users = this.getAllUsers();

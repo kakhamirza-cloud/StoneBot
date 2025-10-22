@@ -11,6 +11,33 @@
           "lootBoxes": 0,
           "airdropAllocations": 0,
           "sparkTokens": 0
+        },
+        "sparkWalletAddress": "123",
+        "taprootWalletAddress": "123"
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {},
+    "gmCooldown": 0,
+    "twitterHandle": "usernameisz"
+  },
+  "1237810533030166580": {
+    "userId": "1237810533030166580",
+    "username": "trinidadversa",
+    "points": 0,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
         }
       }
     ],
