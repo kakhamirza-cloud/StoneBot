@@ -1100,17 +1100,17 @@ Earn points by being active, inviting friends, participating in special events, 
 Purchase: Buy loot boxes for 5 $Stone Points each
 Smart Rewards: Intelligent reward distribution based on wallet requirements
 Reward Types:
-💰 Airdrop Allocation (1% chance, limited to 100 total)
-🪙 20 $Stone Tokens (40% chance)
-🪙 50 $Stone Tokens (30% chance)
-🪙 100 $Stone Tokens (20% chance)
-🪙 500 $Stone Tokens (5% chance)
-🪙 1000 $Stone Tokens (3% chance)
-🪙 4444 $Stone Tokens (1% chance)
+🪙 20 tokens
+🪙 50 tokens
+🪙 100 tokens
+🪙 500 tokens
+🪙 1000 tokens
+💰 Airdrop
+🪙 4444 tokens
 
 👥 **Commands**
 🔗 /invite - Get your personal invitation link to earn $Stone Points
-📦 /inventory - View your inventory and manage multiple wallets (requires Twitter handle)
+📦 /inventory - View your inventory (requires Twitter handle)
 🎁 /buylootbox [quantity] - Buy loot boxes with your $Stone Points
 🎲 /openlootbox - Open your loot boxes to get rewards
 💰 /balance - Check your current $Stone Points balance
