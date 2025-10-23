@@ -2,15 +2,15 @@
   "410662767981232128": {
     "userId": "410662767981232128",
     "username": "mr.z6931",
-    "points": 740,
+    "points": 691,
     "activeWallet": 1,
     "wallets": [
       {
         "walletId": 1,
         "inventory": {
-          "lootBoxes": 52,
+          "lootBoxes": 60,
           "airdropAllocations": 0,
-          "sparkTokens": 0
+          "sparkTokens": 70
         },
         "sparkWalletAddress": "123",
         "taprootWalletAddress": "123"
@@ -23,8 +23,8 @@
       "invitedUsers": []
     },
     "reactionData": {},
-    "gmCooldown": 0,
+    "gmCooldown": 1761235393896,
     "twitterHandle": "username",
-    "lastLootBoxOpen": 1761235277345
+    "lastLootBoxOpen": 1761235440356
   }
 }
