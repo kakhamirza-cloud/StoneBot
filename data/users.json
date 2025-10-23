@@ -25,7 +25,7 @@
     "reactionData": {},
     "gmCooldown": 0,
     "twitterHandle": "usernameisz",
-    "lastLootBoxOpen": 1761234376084
+    "lastLootBoxOpen": 1761234579349
   },
   "1237810533030166580": {
     "userId": "1237810533030166580",
@@ -250,6 +250,90 @@
   "1246080513417023498": {
     "userId": "1246080513417023498",
     "username": "keeperofstone",
+    "points": 1,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1430944112307343442": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 0
+  },
+  "716056425562112102": {
+    "userId": "716056425562112102",
+    "username": "bake69420",
+    "points": 1,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1430944112307343442": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 0
+  },
+  "906864363288277022": {
+    "userId": "906864363288277022",
+    "username": "eriksoon",
+    "points": 1,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1430944112307343442": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 0
+  },
+  "190284095106842624": {
+    "userId": "190284095106842624",
+    "username": "wisedroid",
     "points": 1,
     "activeWallet": 1,
     "wallets": [

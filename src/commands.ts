@@ -409,6 +409,43 @@ export class CommandManager {
     await interaction.reply({ embeds: [embed] });
   }
 
+  private async createInventoryEmbed(context: CommandContext): Promise<EmbedBuilder> {
+    const activeWallet = this.storage.getActiveWallet(context.userData);
+    const maskedSparkWallet = activeWallet.sparkWalletAddress 
+      ? this.maskWalletAddress(activeWallet.sparkWalletAddress)
+      : 'Not set';
+    
+    const maskedTaprootWallet = activeWallet.taprootWalletAddress 
+      ? this.maskWalletAddress(activeWallet.taprootWalletAddress)
+      : 'Not set';
+      
+    const displayName = (context.user as any).globalName || context.user.username;
+    const userAvatarUrl = context.user.displayAvatarURL({ size: 128 });
+    
+    const embed = new EmbedBuilder()
+      .setTitle(`📦 ${displayName}'s Inventory`)
+      .setDescription(`**Spark Wallet:** \`${maskedSparkWallet}\`\n**Taproot Wallet:** \`${maskedTaprootWallet}\`\n**Twitter Handle:** @${context.userData.twitterHandle || 'Not set'}\n**Points:** ${context.userData.points}`)
+      .setThumbnail(userAvatarUrl)
+      .setColor(0x00FF00)
+      .setTimestamp();
+
+    // Add inventory items
+    const inventory = activeWallet.inventory;
+    const sparkTokens = (inventory as any).sparkTokens || 0;
+    
+    const items = [
+      { name: '<:lootbox:1427361328808595537> Loot Boxes', value: (inventory.lootBoxes || 0).toString() },
+      { name: '<:airdropinventory:1427361277109469214> Airdrop Allocations', value: (inventory.airdropAllocations || 0).toString() },
+      { name: '<:stonealloc10:1427361220897275924> $Stone Tokens', value: sparkTokens.toString() }
+    ];
+
+    items.forEach(item => {
+      embed.addFields({ name: item.name, value: item.value, inline: true });
+    });
+
+    return embed;
+  }
+
   private async updateInventoryDisplay(interaction: any, context: CommandContext): Promise<void> {
     const activeWallet = this.storage.getActiveWallet(context.userData);
     const maskedSparkWallet = activeWallet.sparkWalletAddress 
@@ -565,40 +602,11 @@ export class CommandManager {
 
     // Send updated inventory as follow-up message
     try {
-      const activeWallet = this.storage.getActiveWallet(context.userData);
-      const maskedSparkWallet = activeWallet.sparkWalletAddress 
-        ? this.maskWalletAddress(activeWallet.sparkWalletAddress)
-        : 'Not set';
-      
-      const maskedTaprootWallet = activeWallet.taprootWalletAddress 
-        ? this.maskWalletAddress(activeWallet.taprootWalletAddress)
-        : 'Not set';
-        
-      const displayName = (context.user as any).globalName || context.user.username;
-      const userAvatarUrl = context.user.displayAvatarURL({ size: 128 });
-      
-      const inventoryEmbed = new EmbedBuilder()
-        .setTitle(`📦 ${displayName}'s Updated Inventory`)
-        .setDescription(`**Spark Wallet:** \`${maskedSparkWallet}\`\n**Taproot Wallet:** \`${maskedTaprootWallet}\`\n**Twitter Handle:** @${context.userData.twitterHandle || 'Not set'}\n**Points:** ${context.userData.points}`)
-        .setThumbnail(userAvatarUrl)
-        .setColor(0x00FF00)
-        .setTimestamp();
-
-      // Add inventory items
-      const inventory = activeWallet.inventory;
-      const sparkTokens = (inventory as any).sparkTokens || 0;
-      
-      const items = [
-        { name: '<:lootbox:1427361328808595537> Loot Boxes', value: (inventory.lootBoxes || 0).toString() },
-        { name: '<:airdropinventory:1427361277109469214> Airdrop Allocations', value: (inventory.airdropAllocations || 0).toString() },
-        { name: '<:stonealloc10:1427361220897275924> $Stone Tokens', value: sparkTokens.toString() }
-      ];
-
-      items.forEach(item => {
-        inventoryEmbed.addFields({ name: item.name, value: item.value, inline: true });
+      await interaction.followUp({ 
+        content: '📦 **Updated Inventory:**', 
+        embeds: [await this.createInventoryEmbed(context)],
+        ephemeral: false 
       });
-
-      await interaction.followUp({ embeds: [inventoryEmbed], ephemeral: true });
     } catch (error) {
       console.error('Error updating inventory display after loot box opening:', error);
       // Don't fail the loot box opening if inventory update fails

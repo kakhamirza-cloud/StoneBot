@@ -152,6 +152,13 @@ export class LootBoxManager {
     const targetWallet = this.storage.getActiveWallet(userData);
     if (!targetWallet) return;
 
+    console.log(`🎁 Giving reward to user ${userId}:`, {
+      rewardType: reward.type,
+      tokenAmount: reward.tokenAmount,
+      beforeLootBoxes: targetWallet.inventory.lootBoxes,
+      beforeSparkTokens: targetWallet.inventory.sparkTokens
+    });
+
     // Remove one loot box from the target wallet
     targetWallet.inventory.lootBoxes--;
 
@@ -165,7 +172,13 @@ export class LootBoxManager {
         break;
     }
 
+    console.log(`✅ Reward applied:`, {
+      afterLootBoxes: targetWallet.inventory.lootBoxes,
+      afterSparkTokens: targetWallet.inventory.sparkTokens
+    });
+
     this.storage.saveUserData(userId, userData);
+    console.log(`💾 User data saved for ${userId}`);
   }
 
   /**
