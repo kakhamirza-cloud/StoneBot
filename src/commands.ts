@@ -371,7 +371,17 @@ export class CommandManager {
   }
 
   private async showInventory(interaction: CommandInteraction, context: CommandContext): Promise<void> {
-    const activeWallet = this.storage.getActiveWallet(context.userData);
+    // Fetch fresh user data from storage to get updated inventory
+    const freshUserData = this.storage.getUserData(context.userId);
+    if (!freshUserData) {
+      await interaction.reply({ 
+        content: '❌ User data not found. Please try again.', 
+        ephemeral: true 
+      });
+      return;
+    }
+
+    const activeWallet = this.storage.getActiveWallet(freshUserData);
     const maskedSparkWallet = activeWallet.sparkWalletAddress 
       ? this.maskWalletAddress(activeWallet.sparkWalletAddress)
       : 'Not set';
@@ -385,7 +395,7 @@ export class CommandManager {
     
     const embed = new EmbedBuilder()
       .setTitle(`📦 ${displayName}'s Inventory`)
-      .setDescription(`**Spark Wallet:** \`${maskedSparkWallet}\`\n**Taproot Wallet:** \`${maskedTaprootWallet}\`\n**Twitter Handle:** @${context.userData.twitterHandle || 'Not set'}\n**Points:** ${context.userData.points}`)
+      .setDescription(`**Spark Wallet:** \`${maskedSparkWallet}\`\n**Taproot Wallet:** \`${maskedTaprootWallet}\`\n**Twitter Handle:** @${freshUserData.twitterHandle || 'Not set'}\n**Points:** ${freshUserData.points}`)
       .setThumbnail(userAvatarUrl)
       .setColor(0x00FF00)
       .setTimestamp();
@@ -598,18 +608,6 @@ export class CommandManager {
     // Send airdrop notifications if user received an airdrop allocation
     if (reward.type === 'airdrop') {
       await this.sendAirdropNotifications(interaction, context);
-    }
-
-    // Send updated inventory as follow-up message
-    try {
-      await interaction.followUp({ 
-        content: '📦 **Updated Inventory:**', 
-        embeds: [await this.createInventoryEmbed(context)],
-        ephemeral: false 
-      });
-    } catch (error) {
-      console.error('Error updating inventory display after loot box opening:', error);
-      // Don't fail the loot box opening if inventory update fails
     }
   }
 
