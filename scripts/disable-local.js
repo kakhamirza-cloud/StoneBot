@@ -7,10 +7,10 @@ console.log('🛡️ Disabling local bot...');
 const packagePath = path.join(__dirname, '..', 'package.json');
 const packageJson = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
 
-// Disable start scripts
+// Disable start scripts but allow Railway to run
 packageJson.scripts = {
   "build": "tsc",
-  "start": "echo '❌ LOCAL BOT DISABLED - Bot runs only on Railway. Use npm run enable-local to re-enable.' && exit 1",
+  "start": "node -e \"if(process.env.RAILWAY_ENVIRONMENT){require('./dist/index.js')}else{console.log('❌ LOCAL BOT DISABLED - Bot runs only on Railway. Use npm run enable-local to re-enable.');process.exit(1)}\"",
   "dev": "echo '❌ LOCAL BOT DISABLED - Bot runs only on Railway. Use npm run enable-local to re-enable.' && exit 1",
   "watch": "tsc -w",
   "register-commands": "ts-node src/register-commands.ts",
