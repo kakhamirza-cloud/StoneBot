@@ -562,6 +562,14 @@ export class CommandManager {
     if (reward.type === 'airdrop') {
       await this.sendAirdropNotifications(interaction, context);
     }
+
+    // Update inventory display after opening loot box
+    try {
+      await this.updateInventoryDisplay(interaction, context);
+    } catch (error) {
+      console.error('Error updating inventory display after loot box opening:', error);
+      // Don't fail the loot box opening if inventory update fails
+    }
   }
 
   private async handleEditWallet(interaction: CommandInteraction, context: CommandContext): Promise<void> {

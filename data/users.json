@@ -2,13 +2,13 @@
   "410662767981232128": {
     "userId": "410662767981232128",
     "username": "mr.z6931",
-    "points": 0,
+    "points": 50,
     "activeWallet": 1,
     "wallets": [
       {
         "walletId": 1,
         "inventory": {
-          "lootBoxes": 0,
+          "lootBoxes": 10,
           "airdropAllocations": 0,
           "sparkTokens": 0
         },
@@ -24,7 +24,8 @@
     },
     "reactionData": {},
     "gmCooldown": 0,
-    "twitterHandle": "usernameisz"
+    "twitterHandle": "usernameisz",
+    "lastLootBoxOpen": 1761234239126
   },
   "1237810533030166580": {
     "userId": "1237810533030166580",
@@ -48,6 +49,202 @@
       "invitedUsers": []
     },
     "reactionData": {},
+    "gmCooldown": 0
+  },
+  "851782244238229514": {
+    "userId": "851782244238229514",
+    "username": "tsb_gu",
+    "points": 2,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1430944112307343442": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 1761234138834
+  },
+  "940609428909092866": {
+    "userId": "940609428909092866",
+    "username": "shogun5729",
+    "points": 1,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1430944112307343442": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 0
+  },
+  "818834240249528372": {
+    "userId": "818834240249528372",
+    "username": "phongkl",
+    "points": 1,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1430944112307343442": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 0
+  },
+  "304648860423421953": {
+    "userId": "304648860423421953",
+    "username": "ldemarco",
+    "points": 1,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1430944112307343442": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 0
+  },
+  "984064197316988928": {
+    "userId": "984064197316988928",
+    "username": "htyuzu",
+    "points": 1,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1430944112307343442": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 0
+  },
+  "955739256662409226": {
+    "userId": "955739256662409226",
+    "username": "ram_zy001",
+    "points": 1,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1430944112307343442": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 0
+  },
+  "1131331418954412213": {
+    "userId": "1131331418954412213",
+    "username": "oniel55",
+    "points": 1,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1430944112307343442": [
+        "💎"
+      ]
+    },
     "gmCooldown": 0
   }
 }
