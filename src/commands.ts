@@ -601,9 +601,12 @@ export class CommandManager {
 
     await interaction.reply({ embeds: [embed] });
 
-    // Update cooldown timestamp
-    context.userData.lastLootBoxOpen = now;
-    this.storage.saveUserData(context.userId, context.userData);
+    // Update cooldown timestamp - fetch fresh data first
+    const freshUserData = this.storage.getUserData(context.userId);
+    if (freshUserData) {
+      freshUserData.lastLootBoxOpen = now;
+      this.storage.saveUserData(context.userId, freshUserData);
+    }
 
     // Send airdrop notifications if user received an airdrop allocation
     if (reward.type === 'airdrop') {

@@ -143,9 +143,16 @@ export class StorageManager {
 
   saveUserData(userId: string, userData: UserData): void {
     try {
+      console.log(`💾 Saving user data for ${userId}:`, {
+        lootBoxes: userData.wallets[userData.activeWallet - 1]?.inventory.lootBoxes,
+        sparkTokens: userData.wallets[userData.activeWallet - 1]?.inventory.sparkTokens
+      });
+      
       const data = JSON.parse(fs.readFileSync(this.usersFile, 'utf8'));
       data[userId] = userData;
       fs.writeFileSync(this.usersFile, JSON.stringify(data, null, 2));
+      
+      console.log(`✅ User data saved successfully for ${userId}`);
     } catch (error) {
       console.error('Error saving user data:', error);
     }

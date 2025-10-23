@@ -2,13 +2,13 @@
   "410662767981232128": {
     "userId": "410662767981232128",
     "username": "mr.z6931",
-    "points": 750,
+    "points": 740,
     "activeWallet": 1,
     "wallets": [
       {
         "walletId": 1,
         "inventory": {
-          "lootBoxes": 50,
+          "lootBoxes": 52,
           "airdropAllocations": 0,
           "sparkTokens": 0
         },
@@ -25,6 +25,6 @@
     "reactionData": {},
     "gmCooldown": 0,
     "twitterHandle": "username",
-    "lastLootBoxOpen": 1761234903954
+    "lastLootBoxOpen": 1761235277345
   }
 }
