@@ -1967,10 +1967,10 @@ Reward Types:
         message = `Use /editwallet to set or edit your wallet addresses in this channel <#${targetChannelId}>`;
         break;
       case 'panel_openlootbox':
-        message = `Use /openlootbox to open your loot boxes to get rewards in this channel <#${targetChannelId}>`;
+        message = `Use /openlootbox to open your loot boxes to get rewards in this channel <#${targetChannelId}>\n\n**Reward Types:**\n• 20 tokens\n• 50 tokens\n• 100 tokens\n• 500 tokens\n• 1000 tokens\n• Airdrop\n• 4444 tokens`;
         break;
       case 'panel_buylootbox':
-        message = `Use /buylootbox [quantity] to buy loot boxes with your $Stone Points in this channel <#${targetChannelId}>`;
+        message = `Use /buylootbox [quantity] to buy loot boxes with your $Stone Points in this channel <#${targetChannelId}>\n\n**Reward Types:**\n• 20 tokens\n• 50 tokens\n• 100 tokens\n• 500 tokens\n• 1000 tokens\n• Airdrop\n• 4444 tokens`;
         break;
       case 'panel_help':
         message = `Use /help to view all available commands and information`;
