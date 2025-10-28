@@ -2,7 +2,7 @@
   "410662767981232128": {
     "userId": "410662767981232128",
     "username": "mr.z6931",
-    "points": 691,
+    "points": 1016,
     "activeWallet": 1,
     "wallets": [
       {
@@ -10,7 +10,7 @@
         "inventory": {
           "lootBoxes": 60,
           "airdropAllocations": 0,
-          "sparkTokens": 70
+          "sparkTokens": 120
         },
         "sparkWalletAddress": "123",
         "taprootWalletAddress": "123"
@@ -25,6 +25,32 @@
     "reactionData": {},
     "gmCooldown": 1761235393896,
     "twitterHandle": "username",
-    "lastLootBoxOpen": 1761235440356
+    "lastLootBoxOpen": 1761664313986,
+    "lastDailyPointsClaim": 1761664401101
+  },
+  "1246080513417023498": {
+    "userId": "1246080513417023498",
+    "username": "keeperofstone",
+    "points": 30,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {},
+    "gmCooldown": 0,
+    "lastDailyPointsClaim": 1761664401101
   }
 }

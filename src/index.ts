@@ -3,6 +3,7 @@ import { CommandManager } from './commands';
 import { StorageManager } from './storage';
 import { PointManager } from './points';
 import { TwitterValidator } from './twitter-validator';
+import { DailyRolePointsService } from './daily-role-points';
 import * as dotenv from 'dotenv';
 
 // Load environment variables
@@ -22,6 +23,7 @@ class SparkBot {
   private commandManager: CommandManager;
   private storage: StorageManager;
   private pointManager: PointManager;
+  private dailyRolePointsService: DailyRolePointsService;
 
   constructor() {
     this.client = new Client({
@@ -38,15 +40,20 @@ class SparkBot {
     this.storage = new StorageManager();
     this.pointManager = new PointManager(this.storage);
     this.commandManager = new CommandManager();
+    this.dailyRolePointsService = new DailyRolePointsService(this.client, this.storage);
 
     this.setupEventHandlers();
   }
 
   private setupEventHandlers(): void {
     // Bot ready event
-    this.client.once(Events.ClientReady, (readyClient) => {
+    this.client.once(Events.ClientReady, async (readyClient) => {
       console.log(`🚀 Spark Bot is ready! Logged in as ${readyClient.user.tag}`);
       console.log(`📊 Bot is in ${readyClient.guilds.cache.size} guild(s)`);
+      
+      // Start the daily role points service
+      console.log('🎁 Starting Daily Role Points Service...');
+      this.dailyRolePointsService.start();
     });
 
     // Slash command interaction
@@ -378,6 +385,7 @@ class SparkBot {
 
   public async stop(): Promise<void> {
     console.log('🛑 Shutting down Spark Bot...');
+    this.dailyRolePointsService.stop();
     this.client.destroy();
   }
 }

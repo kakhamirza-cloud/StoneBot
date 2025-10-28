@@ -12,6 +12,7 @@ export interface UserData {
   gmCooldown?: number; // Timestamp of last GM reward (for 24-hour cooldown)
   twitterHandle?: string; // User's Twitter handle (global, not per wallet)
   lastLootBoxOpen?: number; // Timestamp of last lootbox opening (for 30-second cooldown)
+  lastDailyPointsClaim?: number; // Timestamp of last daily role points claim (for preventing duplicate claims)
 }
 
 // Individual wallet structure
