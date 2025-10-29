@@ -129,3 +129,5 @@ The bot shows:
 - Bot processes all guilds it's in
 - Bots are excluded from receiving points
 - Members who no longer have the roles won't receive points
+
+
