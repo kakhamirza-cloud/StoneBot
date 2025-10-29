@@ -36,8 +36,8 @@ export class StorageManager {
     if (!fs.existsSync(this.stateFile)) {
       const initialState: GlobalState = {
         totalAirdropsGiven: 0,
-        maxAirdrops: 20,
-        globalAirdropLimit: 20,
+        maxAirdrops: 5,
+        globalAirdropLimit: 5,
         totalAirdropsDistributed: 0,
         lootBoxRewards: [
           {
@@ -203,8 +203,10 @@ export class StorageManager {
       const data = JSON.parse(fs.readFileSync(this.stateFile, 'utf8'));
       // Ensure new fields exist for backward compatibility
       if (data.globalAirdropLimit === undefined) {
-        data.globalAirdropLimit = 20;
+        data.globalAirdropLimit = 5;
       }
+      // Force update globalAirdropLimit to 5 (enforce new limit)
+      data.globalAirdropLimit = 5;
       if (data.totalAirdropsDistributed === undefined) {
         data.totalAirdropsDistributed = 0;
       }
@@ -213,9 +215,9 @@ export class StorageManager {
       console.error('Error reading global state:', error);
       return {
         totalAirdropsGiven: 0,
-        maxAirdrops: 20,
+        maxAirdrops: 5,
         lootBoxRewards: [],
-        globalAirdropLimit: 20,
+        globalAirdropLimit: 5,
         totalAirdropsDistributed: 0
       };
     }

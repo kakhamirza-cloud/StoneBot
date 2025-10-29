@@ -2,39 +2,48 @@
   "410662767981232128": {
     "userId": "410662767981232128",
     "username": "mr.z6931",
-    "points": 637,
+    "points": 921,
     "activeWallet": 1,
     "wallets": [
       {
         "walletId": 1,
         "inventory": {
-          "lootBoxes": 67,
+          "lootBoxes": 75,
           "airdropAllocations": 0,
-          "sparkTokens": 320
+          "sparkTokens": 420
         },
         "sparkWalletAddress": "123",
         "taprootWalletAddress": "123"
       }
     ],
     "inviteData": {
-      "inviteCode": "",
+      "inviteCode": "cuUWEGEaZv",
       "uses": 0,
       "pointsEarned": 0,
       "invitedUsers": []
     },
     "reactionData": {
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1432831023107805234": [
+        "🐋",
+        "🔥",
+        "💎"
       ]
     },
     "gmCooldown": 1761235393896,
     "twitterHandle": "username",
-    "lastLootBoxOpen": 1761324182021
+    "lastLootBoxOpen": 1761665725023,
+    "lastDailyPointsClaim": 1761696000011
   },
   "1237810533030166580": {
     "userId": "1237810533030166580",
     "username": "trinidadversa",
-    "points": 1,
+    "points": 2,
     "activeWallet": 1,
     "wallets": [
       {
@@ -55,7 +64,7 @@
       "invitedUsers": []
     },
     "reactionData": {},
-    "gmCooldown": 1761236897226,
+    "gmCooldown": 1761742747264,
     "twitterHandle": "User",
     "lastLootBoxOpen": 1761253567548
   },
@@ -110,7 +119,7 @@
   "544932290703261696": {
     "userId": "544932290703261696",
     "username": ".cryinglady",
-    "points": 3,
+    "points": 1,
     "activeWallet": 1,
     "wallets": [
       {
@@ -118,7 +127,7 @@
         "inventory": {
           "lootBoxes": 0,
           "airdropAllocations": 0,
-          "sparkTokens": 9154
+          "sparkTokens": 14854
         },
         "sparkWalletAddress": "sp1pgssy35dxnzh3xn5qzk6xgh6ktp6rfxg7sxlkywqvcf3acc43crehp3yu7xukj",
         "taprootWalletAddress": "bc1pwsmztfl6jlan9r8nctw90q9s03mrphvkzhzm4l94rzpk295cqzhqcgu60z"
@@ -126,8 +135,8 @@
     ],
     "inviteData": {
       "inviteCode": "5vmFkeTbMr",
-      "uses": 39,
-      "pointsEarned": 195,
+      "uses": 48,
+      "pointsEarned": 240,
       "invitedUsers": [
         "1357235177159528620",
         "367373127514324996",
@@ -167,43 +176,69 @@
         "1432402633712337003",
         "789800004105404417",
         "826556717244088341",
-        "764859999167184996"
+        "764859999167184996",
+        "525040016012083210",
+        "1119287595868893224",
+        "764890809392168990",
+        "636572160974127125",
+        "897739674825654273",
+        "1133457357981089884",
+        "1237810533030166580",
+        "911047644909035552",
+        "912584113049985084"
       ]
     },
     "reactionData": {
       "1431319021189333134": [
-        "\ud83d\udc8e",
-        "\ud83c\udf29\ufe0f"
+        "💎",
+        "🌩️"
       ],
       "1431324431699017788": [
-        "\ud83d\udc8e",
-        "\ud83d\udcb0",
-        "\ud83d\udca1",
-        "\ud83c\udf0c"
+        "💎",
+        "💰",
+        "💡",
+        "🌌"
       ],
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1432831023107805234": [
+        "💎",
+        "🐋",
+        "🔥"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
+      ],
+      "1433088428219699311": [
+        "💎"
       ]
     },
-    "gmCooldown": 1761637190207,
-    "lastLootBoxOpen": 1761629979151,
+    "gmCooldown": 1761723857860,
+    "lastLootBoxOpen": 1761749913712,
     "twitterHandle": "CryingLady_ETH"
   },
   "906414038701981696": {
     "userId": "906414038701981696",
     "username": "adejoke7627",
-    "points": 33,
+    "points": 59,
     "activeWallet": 1,
     "wallets": [
       {
         "walletId": 1,
         "inventory": {
-          "lootBoxes": 0,
+          "lootBoxes": 5,
           "airdropAllocations": 0,
-          "sparkTokens": 840
+          "sparkTokens": 2230
         },
         "sparkWalletAddress": "sp1pgssx2uzl3amw0y6phzacwhuymqdegfga63gdakqklp2ya6vlgn8yn4heshfl4",
         "taprootWalletAddress": "bc1pqz0pxcns8xny9kpr09wrfzv926skcu6836j0xnqf94h5v0cztc9safhfw9"
@@ -217,26 +252,41 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f"
+        "🌩️"
       ],
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1432831023107805234": [
+        "💎"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
+      ],
+      "1433088428219699311": [
+        "💎"
       ]
     },
-    "gmCooldown": 1761635175860,
+    "gmCooldown": 1761736091069,
     "twitterHandle": "adejoke_btc",
-    "lastLootBoxOpen": 1761528869554
+    "lastLootBoxOpen": 1761721648867
   },
   "886754005261352980": {
     "userId": "886754005261352980",
     "username": "wl_mint",
-    "points": 0,
+    "points": 3,
     "activeWallet": 1,
     "wallets": [
       {
@@ -256,22 +306,30 @@
       "pointsEarned": 0,
       "invitedUsers": []
     },
-    "reactionData": {},
+    "reactionData": {
+      "1432831023107805234": [
+        "💎",
+        "🐋"
+      ],
+      "1433088428219699311": [
+        "💎"
+      ]
+    },
     "gmCooldown": 0,
     "twitterHandle": "WL_Mint"
   },
   "967605713897652224": {
     "userId": "967605713897652224",
     "username": "aldaril_7",
-    "points": 0,
+    "points": 24,
     "activeWallet": 1,
     "wallets": [
       {
         "walletId": 1,
         "inventory": {
           "lootBoxes": 0,
-          "airdropAllocations": 0,
-          "sparkTokens": 2030
+          "airdropAllocations": 1,
+          "sparkTokens": 6170
         },
         "sparkWalletAddress": "sp1pgssyus9eqk0mhm6sz6j9lpk8tqhcul26e9e23lkvzh6lgy6cmhnv89klr7stl",
         "taprootWalletAddress": "bc1pch0zar8qrj702sle7ulvqnf0exhn928wlj6cwnlhfv444qplnhcqvfyha7"
@@ -285,20 +343,29 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432831023107805234": [
+        "🐋"
+      ],
+      "1433078912451088496": [
+        "💎"
+      ],
+      "1433088428219699311": [
+        "💎"
       ]
     },
-    "gmCooldown": 1761593823500,
+    "gmCooldown": 1761689321614,
     "twitterHandle": "Aldaril_7",
-    "lastLootBoxOpen": 1761653348926
+    "lastLootBoxOpen": 1761742231421
   },
   "364135865200672770": {
     "userId": "364135865200672770",
     "username": "samish.369",
-    "points": 3,
+    "points": 5,
     "activeWallet": 1,
     "wallets": [
       {
@@ -316,13 +383,17 @@
       "pointsEarned": 0,
       "invitedUsers": []
     },
-    "reactionData": {},
-    "gmCooldown": 1761526075154
+    "reactionData": {
+      "1432873848172445726": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 1761686644651
   },
   "1075592487252525096": {
     "userId": "1075592487252525096",
     "username": "hairstonjoker",
-    "points": 4,
+    "points": 8,
     "activeWallet": 1,
     "wallets": [
       {
@@ -340,13 +411,23 @@
       "pointsEarned": 0,
       "invitedUsers": []
     },
-    "reactionData": {},
-    "gmCooldown": 1761577500782
+    "reactionData": {
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 1761665958075
   },
   "940609428909092866": {
     "userId": "940609428909092866",
     "username": "shogun5729",
-    "points": 12,
+    "points": 48,
     "activeWallet": 1,
     "wallets": [
       {
@@ -368,23 +449,38 @@
     },
     "reactionData": {
       "1431319021189333134": [
-        "\ud83d\udc8e",
-        "\ud83c\udf29\ufe0f"
+        "💎",
+        "🌩️"
       ],
       "1431324431699017788": [
-        "\ud83d\udc8e",
-        "\ud83d\udcb0",
-        "\ud83d\udca1",
-        "\ud83c\udf0c"
+        "💎",
+        "💰",
+        "💡",
+        "🌌"
       ],
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1432831023107805234": [
+        "💎"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
+      ],
+      "1433088428219699311": [
+        "💎"
       ]
     },
-    "gmCooldown": 1761657716366,
+    "gmCooldown": 1761747560593,
     "twitterHandle": "apokjamir150"
   },
   "961478327883948042": {
@@ -414,15 +510,15 @@
   "1012568682913861755": {
     "userId": "1012568682913861755",
     "username": "avgur770",
-    "points": 1,
+    "points": 7,
     "activeWallet": 1,
     "wallets": [
       {
         "walletId": 1,
         "inventory": {
-          "lootBoxes": 0,
+          "lootBoxes": 1,
           "airdropAllocations": 0,
-          "sparkTokens": 1150
+          "sparkTokens": 1200
         },
         "sparkWalletAddress": "sp1pgssyvcq0y9e9zq0m2hvmx8ssmdjxrw56avvcje99s49q2f04tjcy8r4cuamul",
         "taprootWalletAddress": "bc1pn2kcs6d5eryef208jv3uhadus025pmqa4qek0968vmjuwud4fw7qn73szx"
@@ -436,18 +532,33 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f"
+        "🌩️"
       ],
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1433088428219699311": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1432831023107805234": [
+        "💎"
+      ],
+      "1432804304359653396": [
+        "💎"
       ]
     },
-    "gmCooldown": 1761580228881,
+    "gmCooldown": 1761710614266,
     "twitterHandle": "https://x.com/avicrypto770",
-    "lastLootBoxOpen": 1761580282510
+    "lastLootBoxOpen": 1761671319045
   },
   "1238210716322758852": {
     "userId": "1238210716322758852",
@@ -476,7 +587,7 @@
   "1014454280805163008": {
     "userId": "1014454280805163008",
     "username": "taprootwizards",
-    "points": 1,
+    "points": 2,
     "activeWallet": 1,
     "wallets": [
       {
@@ -497,21 +608,21 @@
       "invitedUsers": []
     },
     "reactionData": {},
-    "gmCooldown": 1761310346942,
+    "gmCooldown": 1761744373174,
     "twitterHandle": "worldranking10"
   },
   "851782244238229514": {
     "userId": "851782244238229514",
     "username": "tsb_gu",
-    "points": 107,
+    "points": 0,
     "activeWallet": 1,
     "wallets": [
       {
         "walletId": 1,
         "inventory": {
           "lootBoxes": 0,
-          "airdropAllocations": 0,
-          "sparkTokens": 630
+          "airdropAllocations": 1,
+          "sparkTokens": 2350
         },
         "sparkWalletAddress": "sp1pgss8h34x85wgjyxta9dx2rjxrkfjrckxxh7pgyms8fkxgdsr0fs72w8zfclzn",
         "taprootWalletAddress": "bc1psax97jz8jy0fyv6h6sv2ld057hqg49yj9kzsrrdnkuzqwsvr900sve4ngk"
@@ -519,8 +630,8 @@
     ],
     "inviteData": {
       "inviteCode": "MdmhHdq9by",
-      "uses": 32,
-      "pointsEarned": 160,
+      "uses": 41,
+      "pointsEarned": 205,
       "invitedUsers": [
         "610152424044363776",
         "1146723326333558835",
@@ -553,17 +664,32 @@
         "1432402633712337003",
         "789800004105404417",
         "826556717244088341",
-        "764859999167184996"
+        "764859999167184996",
+        "525040016012083210",
+        "1119287595868893224",
+        "764890809392168990",
+        "636572160974127125",
+        "897739674825654273",
+        "1133457357981089884",
+        "1237810533030166580",
+        "911047644909035552",
+        "912584113049985084"
       ]
     },
     "reactionData": {
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
+      ],
+      "1433088428219699311": [
+        "💎"
       ]
     },
-    "gmCooldown": 1761311185467,
+    "gmCooldown": 1761713529178,
     "twitterHandle": "tsb_dllm",
-    "lastLootBoxOpen": 1761313622628
+    "lastLootBoxOpen": 1761746585227
   },
   "610152424044363776": {
     "userId": "610152424044363776",
@@ -592,7 +718,7 @@
   "1246080513417023498": {
     "userId": "1246080513417023498",
     "username": "keeperofstone",
-    "points": 4,
+    "points": 41,
     "activeWallet": 1,
     "wallets": [
       {
@@ -612,14 +738,29 @@
     },
     "reactionData": {
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f",
-        "\ud83d\udc8e"
+        "🌩️",
+        "💎"
       ],
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1432831023107805234": [
+        "🔥",
+        "🐋",
+        "💎"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
       ]
     },
-    "gmCooldown": 1761323466336
+    "gmCooldown": 1761750843794,
+    "lastDailyPointsClaim": 1761696000011
   },
   "451214539992596480": {
     "userId": "451214539992596480",
@@ -648,7 +789,7 @@
   "716056425562112102": {
     "userId": "716056425562112102",
     "username": "bake69420",
-    "points": 2,
+    "points": 3,
     "activeWallet": 1,
     "wallets": [
       {
@@ -668,8 +809,11 @@
     },
     "reactionData": {
       "1431319021189333134": [
-        "\ud83d\udc8e",
-        "\ud83c\udf29\ufe0f"
+        "💎",
+        "🌩️"
+      ],
+      "1433088428219699311": [
+        "💎"
       ]
     },
     "gmCooldown": 0
@@ -677,7 +821,7 @@
   "1131331418954412213": {
     "userId": "1131331418954412213",
     "username": "oniel55",
-    "points": 9,
+    "points": 12,
     "activeWallet": 1,
     "wallets": [
       {
@@ -697,19 +841,28 @@
     },
     "reactionData": {
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f",
-        "\ud83d\udc8e"
+        "🌩️",
+        "💎"
       ],
       "1431324431699017788": [
-        "\ud83d\udc8e",
-        "\ud83d\udcb0",
-        "\ud83d\udca1"
+        "💎",
+        "💰",
+        "💡"
       ],
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
       ]
     },
     "gmCooldown": 1761643363355
@@ -717,7 +870,7 @@
   "1131505106215501874": {
     "userId": "1131505106215501874",
     "username": "jiggy_5638",
-    "points": 2,
+    "points": 3,
     "activeWallet": 1,
     "wallets": [
       {
@@ -725,7 +878,7 @@
         "inventory": {
           "lootBoxes": 0,
           "airdropAllocations": 0,
-          "sparkTokens": 0
+          "sparkTokens": 710
         },
         "sparkWalletAddress": "sp1pgssyfejsq96y43hu8hcqxchnwqglzrsf9ek8keahm7pt5c0wswqmgzu95pdn4",
         "taprootWalletAddress": "bc1p4f2dxstznzp9mt556hgmu6v2aeeea3766hm0nnx5s0sew7j54msq3lsedh"
@@ -739,19 +892,35 @@
     },
     "reactionData": {
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f"
+        "🌩️"
       ],
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1432831023107805234": [
+        "💎"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
+      ],
+      "1433088428219699311": [
+        "💎"
       ]
     },
-    "gmCooldown": 0,
-    "twitterHandle": "11thSaiNt"
+    "gmCooldown": 1761732147706,
+    "twitterHandle": "11thSaiNt",
+    "lastLootBoxOpen": 1761712879287
   },
   "895314770905935892": {
     "userId": "895314770905935892",
     "username": "babanft",
-    "points": 2,
+    "points": 3,
     "activeWallet": 1,
     "wallets": [
       {
@@ -771,8 +940,11 @@
     },
     "reactionData": {
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f",
-        "\ud83d\udc8e"
+        "🌩️",
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
       ]
     },
     "gmCooldown": 0
@@ -780,16 +952,18 @@
   "946527023889784883": {
     "userId": "946527023889784883",
     "username": "kaspar7361",
-    "points": 8,
+    "points": 4,
     "activeWallet": 1,
     "wallets": [
       {
         "walletId": 1,
         "inventory": {
-          "lootBoxes": 0,
+          "lootBoxes": 2,
           "airdropAllocations": 0,
-          "sparkTokens": 0
-        }
+          "sparkTokens": 930
+        },
+        "sparkWalletAddress": "sp1pgssykzcvgy772nu3vpwwy9e39kkkg6y0e4qtghex6693lyqlufxdjsx259al6",
+        "taprootWalletAddress": "bc1pxhxxcud9gnslr0y0jxqs4gp5nveh96340ers3lz74zyq6ff02kcsfgxmkn"
       }
     ],
     "inviteData": {
@@ -800,26 +974,43 @@
     },
     "reactionData": {
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f"
+        "🌩️"
       ],
       "1431324431699017788": [
-        "\ud83d\udcb0",
-        "\ud83d\udc8e",
-        "\ud83d\udca1"
+        "💰",
+        "💎",
+        "💡"
       ],
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1432831023107805234": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1433088428219699311": [
+        "💎"
       ]
     },
-    "gmCooldown": 1761566067458
+    "gmCooldown": 1761679689002,
+    "twitterHandle": "pkasiou",
+    "lastLootBoxOpen": 1761731126113
   },
   "818834240249528372": {
     "userId": "818834240249528372",
     "username": "phongkl",
-    "points": 1,
+    "points": 3,
     "activeWallet": 1,
     "wallets": [
       {
@@ -839,7 +1030,13 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
       ]
     },
     "gmCooldown": 0
@@ -874,7 +1071,7 @@
   "906864363288277022": {
     "userId": "906864363288277022",
     "username": "eriksoon",
-    "points": 3,
+    "points": 4,
     "activeWallet": 1,
     "wallets": [
       {
@@ -894,11 +1091,14 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f",
-        "\ud83d\udc8e"
+        "🌩️",
+        "💎"
+      ],
+      "1433088428219699311": [
+        "💎"
       ]
     },
     "gmCooldown": 0
@@ -906,7 +1106,7 @@
   "1009348977415692289": {
     "userId": "1009348977415692289",
     "username": "lanesra69",
-    "points": 7,
+    "points": 13,
     "activeWallet": 1,
     "wallets": [
       {
@@ -926,22 +1126,37 @@
     },
     "reactionData": {
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1431324431699017788": [
-        "\ud83d\udc8e",
-        "\ud83d\udcb0",
-        "\ud83c\udf0c"
+        "💎",
+        "💰",
+        "🌌"
       ],
       "1431319021189333134": [
-        "\ud83d\udc8e",
-        "\ud83c\udf29\ufe0f"
+        "💎",
+        "🌩️"
       ],
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432831023107805234": [
+        "💎"
+      ],
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
+      ],
+      "1433088428219699311": [
+        "💎"
       ]
     },
-    "gmCooldown": 0
+    "gmCooldown": 1761693251369
   },
   "761976754868191234": {
     "userId": "761976754868191234",
@@ -954,7 +1169,7 @@
         "inventory": {
           "lootBoxes": 0,
           "airdropAllocations": 0,
-          "sparkTokens": 100
+          "sparkTokens": 540
         },
         "sparkWalletAddress": "sp1pgss83xn26m8em9e2ltajprmxzavhhg5jkqfupvf7s6g5tjexwdhz7gk4hauxw",
         "taprootWalletAddress": "bc1pla4exmckn08029wvjj2ecvzkmwvscswln3j3arj2kq4gqkexyjksqd42ez"
@@ -968,26 +1183,34 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e",
-        "\ud83d\udcb0",
-        "\ud83d\udca1"
+        "💎",
+        "💰",
+        "💡"
       ],
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f",
-        "\ud83d\udc8e"
+        "🌩️",
+        "💎"
       ],
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432831023107805234": [
+        "💎",
+        "🐋",
+        "🔥"
+      ],
+      "1432804304359653396": [
+        "💎"
       ]
     },
-    "gmCooldown": 1761583762407,
+    "gmCooldown": 1761677955191,
     "twitterHandle": "flyers4eva_",
-    "lastLootBoxOpen": 1761583745355
+    "lastLootBoxOpen": 1761691480860
   },
   "231018596099162112": {
     "userId": "231018596099162112",
     "username": "eskabe",
-    "points": 38,
+    "points": 39,
     "activeWallet": 1,
     "wallets": [
       {
@@ -1009,17 +1232,17 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e",
-        "\ud83d\udcb0",
-        "\ud83d\udca1",
-        "\ud83c\udf0c"
+        "💎",
+        "💰",
+        "💡",
+        "🌌"
       ],
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f",
-        "\ud83d\udc8e"
+        "🌩️",
+        "💎"
       ]
     },
-    "gmCooldown": 1761416870428
+    "gmCooldown": 1761670055118
   },
   "335288513610383360": {
     "userId": "335288513610383360",
@@ -1044,7 +1267,7 @@
     },
     "reactionData": {
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ]
     },
     "gmCooldown": 0
@@ -1079,7 +1302,7 @@
   "1096366607573454939": {
     "userId": "1096366607573454939",
     "username": "gabriel_eth",
-    "points": 6,
+    "points": 8,
     "activeWallet": 1,
     "wallets": [
       {
@@ -1099,16 +1322,22 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e",
-        "\ud83d\udcb0",
-        "\ud83d\udca1",
-        "\ud83c\udf0c"
+        "💎",
+        "💰",
+        "💡",
+        "🌌"
       ],
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f"
+        "🌩️"
       ],
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
       ]
     },
     "gmCooldown": 0
@@ -1116,7 +1345,7 @@
   "1403467674612400191": {
     "userId": "1403467674612400191",
     "username": "decentphorcus",
-    "points": 1,
+    "points": 3,
     "activeWallet": 1,
     "wallets": [
       {
@@ -1136,7 +1365,13 @@
     },
     "reactionData": {
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1433088428219699311": [
+        "💎"
       ]
     },
     "gmCooldown": 0
@@ -1144,7 +1379,7 @@
   "431266291404505098": {
     "userId": "431266291404505098",
     "username": "th3lfi5tmfi7v",
-    "points": 14,
+    "points": 1,
     "activeWallet": 1,
     "wallets": [
       {
@@ -1152,7 +1387,7 @@
         "inventory": {
           "lootBoxes": 0,
           "airdropAllocations": 0,
-          "sparkTokens": 7414
+          "sparkTokens": 8124
         },
         "sparkWalletAddress": "sp1pgss866mjguevnpnq4gmn654gtcwkcqc36ydf9ellegq9tvvhqf2nhe4k28840",
         "taprootWalletAddress": "bc1p4jt46aq9p24cugkxywhe4ela49g46qteudm26pv5f9k3v9sz4g2qe26kpn"
@@ -1166,24 +1401,38 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e",
-        "\ud83d\udcb0",
-        "\ud83d\udca1",
-        "\ud83c\udf0c"
+        "💎",
+        "💰",
+        "💡",
+        "🌌"
       ],
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f",
-        "\ud83d\udc8e"
+        "🌩️",
+        "💎"
+      ],
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1432831023107805234": [
+        "💎",
+        "🐋",
+        "🔥"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1433088428219699311": [
+        "💎"
       ]
     },
-    "gmCooldown": 1761583052214,
+    "gmCooldown": 1761699285381,
     "twitterHandle": "TH3LFI5TMFI7V",
-    "lastLootBoxOpen": 1761582996329
+    "lastLootBoxOpen": 1761699314184
   },
   "603892089075400724": {
     "userId": "603892089075400724",
     "username": "cryptor8652",
-    "points": 22,
+    "points": 55,
     "activeWallet": 1,
     "wallets": [
       {
@@ -1203,8 +1452,13 @@
     },
     "reactionData": {
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f",
-        "\ud83d\udc8e"
+        "🌩️",
+        "💎"
+      ],
+      "1432831023107805234": [
+        "💎",
+        "🐋",
+        "🔥"
       ]
     },
     "gmCooldown": 0
@@ -1234,7 +1488,7 @@
     },
     "reactionData": {
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f"
+        "🌩️"
       ]
     },
     "gmCooldown": 0,
@@ -1243,7 +1497,7 @@
   "1010182386551623830": {
     "userId": "1010182386551623830",
     "username": ".dextroid",
-    "points": 0,
+    "points": 52,
     "activeWallet": 1,
     "wallets": [
       {
@@ -1263,7 +1517,14 @@
       "pointsEarned": 0,
       "invitedUsers": []
     },
-    "reactionData": {},
+    "reactionData": {
+      "1432831023107805234": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
+      ]
+    },
     "gmCooldown": 0,
     "twitterHandle": "dextroid1"
   },
@@ -1298,7 +1559,7 @@
   "792782295404642325": {
     "userId": "792782295404642325",
     "username": "111grizzly",
-    "points": 34,
+    "points": 35,
     "activeWallet": 1,
     "wallets": [
       {
@@ -1318,13 +1579,16 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f"
+        "🌩️"
       ],
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432804304359653396": [
+        "💎"
       ]
     },
     "gmCooldown": 1761335731764
@@ -1332,7 +1596,7 @@
   "904714237744664596": {
     "userId": "904714237744664596",
     "username": "cajuncanadian",
-    "points": 0,
+    "points": 1,
     "activeWallet": 1,
     "wallets": [
       {
@@ -1353,7 +1617,7 @@
       "invitedUsers": []
     },
     "reactionData": {},
-    "gmCooldown": 0,
+    "gmCooldown": 1761743222998,
     "twitterHandle": "cajuncanadian_"
   },
   "1215391875632996493": {
@@ -1379,11 +1643,11 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e",
-        "\ud83d\udcb0"
+        "💎",
+        "💰"
       ],
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f"
+        "🌩️"
       ]
     },
     "gmCooldown": 0
@@ -1391,7 +1655,7 @@
   "939594710362755104": {
     "userId": "939594710362755104",
     "username": "bilalabuanvar",
-    "points": 3,
+    "points": 7,
     "activeWallet": 1,
     "wallets": [
       {
@@ -1411,8 +1675,14 @@
       "pointsEarned": 0,
       "invitedUsers": []
     },
-    "reactionData": {},
-    "gmCooldown": 1761597364563,
+    "reactionData": {
+      "1432831023107805234": [
+        "🐋",
+        "💎",
+        "🔥"
+      ]
+    },
+    "gmCooldown": 1761684397595,
     "twitterHandle": "miron_nft"
   },
   "850176458194288690": {
@@ -1462,9 +1732,9 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e",
-        "\ud83d\udcb0",
-        "\ud83d\udca1"
+        "💎",
+        "💰",
+        "💡"
       ]
     },
     "gmCooldown": 0
@@ -1492,14 +1762,14 @@
     },
     "reactionData": {
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1431324431699017788": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f",
-        "\ud83d\udc8e"
+        "🌩️",
+        "💎"
       ]
     },
     "gmCooldown": 1761340898656
@@ -1527,11 +1797,11 @@
     },
     "reactionData": {
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f",
-        "\ud83d\udc8e"
+        "🌩️",
+        "💎"
       ],
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ]
     },
     "gmCooldown": 0
@@ -1539,7 +1809,7 @@
   "828508387511500800": {
     "userId": "828508387511500800",
     "username": "biras.",
-    "points": 2,
+    "points": 3,
     "activeWallet": 1,
     "wallets": [
       {
@@ -1558,7 +1828,7 @@
       "invitedUsers": []
     },
     "reactionData": {},
-    "gmCooldown": 1761534490683
+    "gmCooldown": 1761748053322
   },
   "741823165994500167": {
     "userId": "741823165994500167",
@@ -1583,7 +1853,7 @@
     },
     "reactionData": {
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ]
     },
     "gmCooldown": 1761567396213
@@ -1591,7 +1861,7 @@
   "1084364618790617128": {
     "userId": "1084364618790617128",
     "username": "lucyla2638",
-    "points": 9,
+    "points": 13,
     "activeWallet": 1,
     "wallets": [
       {
@@ -1611,23 +1881,32 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e",
-        "\ud83d\udcb0",
-        "\ud83d\udca1",
-        "\ud83c\udf0c"
+        "💎",
+        "💰",
+        "💡",
+        "🌌"
       ],
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f",
-        "\ud83d\udc8e"
+        "🌩️",
+        "💎"
       ],
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1432831023107805234": [
+        "💎"
+      ],
+      "1432873848172445726": [
+        "💎"
       ]
     },
-    "gmCooldown": 1761605574954
+    "gmCooldown": 1761693502867
   },
   "924336612966547466": {
     "userId": "924336612966547466",
@@ -1652,16 +1931,16 @@
     },
     "reactionData": {
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1431324431699017788": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1431319021189333134": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
       ]
     },
     "gmCooldown": 1761591539729
@@ -1689,10 +1968,10 @@
     },
     "reactionData": {
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1431324431699017788": [
-        "\ud83d\udcb0"
+        "💰"
       ]
     },
     "gmCooldown": 0
@@ -1700,7 +1979,7 @@
   "787501344201244692": {
     "userId": "787501344201244692",
     "username": "koolguy8092",
-    "points": 4,
+    "points": 1,
     "activeWallet": 1,
     "wallets": [
       {
@@ -1708,8 +1987,10 @@
         "inventory": {
           "lootBoxes": 0,
           "airdropAllocations": 0,
-          "sparkTokens": 50
-        }
+          "sparkTokens": 100
+        },
+        "sparkWalletAddress": "sp1pgss9w3ss6zgk5dzfknx20jp2g7gtlldhgjl8sneqrzpp9yf6yj6ntfgau56ut",
+        "taprootWalletAddress": "bc1pzcm3y8yfc9wan3xryztluntfvep5vc5wfv9dwg6d4zznepy439esg7uvur"
       }
     ],
     "inviteData": {
@@ -1720,23 +2001,30 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e",
-        "\ud83d\udcb0",
-        "\ud83d\udca1",
-        "\ud83c\udf0c"
+        "💎",
+        "💰",
+        "💡",
+        "🌌"
       ],
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f"
+        "🌩️"
       ],
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
       ]
     },
     "gmCooldown": 1761645632262,
-    "lastLootBoxOpen": 1761553147036
+    "lastLootBoxOpen": 1761703674968,
+    "twitterHandle": "999trollol"
   },
   "264621744159981568": {
     "userId": "264621744159981568",
@@ -1812,13 +2100,13 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f"
+        "🌩️"
       ],
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ]
     },
     "gmCooldown": 0
@@ -1846,10 +2134,10 @@
     },
     "reactionData": {
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f"
+        "🌩️"
       ],
       "1431324431699017788": [
-        "\ud83d\udc8e"
+        "💎"
       ]
     },
     "gmCooldown": 0
@@ -1905,7 +2193,7 @@
   "712562132113293313": {
     "userId": "712562132113293313",
     "username": "kaboozyako",
-    "points": 4,
+    "points": 5,
     "activeWallet": 1,
     "wallets": [
       {
@@ -1925,13 +2213,13 @@
     },
     "reactionData": {
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
       ]
     },
-    "gmCooldown": 1761624143455
+    "gmCooldown": 1761725696302
   },
   "897682994733662259": {
     "userId": "897682994733662259",
@@ -1956,8 +2244,8 @@
     },
     "reactionData": {
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f",
-        "\ud83d\udc8e"
+        "🌩️",
+        "💎"
       ]
     },
     "gmCooldown": 0
@@ -2011,7 +2299,7 @@
     },
     "reactionData": {
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
       ]
     },
     "gmCooldown": 1761618737173
@@ -2039,7 +2327,7 @@
     },
     "reactionData": {
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ]
     },
     "gmCooldown": 1761477373334
@@ -2047,7 +2335,7 @@
   "1257044991381864519": {
     "userId": "1257044991381864519",
     "username": "cassio.bil",
-    "points": 6,
+    "points": 11,
     "activeWallet": 1,
     "wallets": [
       {
@@ -2067,16 +2355,29 @@
     },
     "reactionData": {
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f",
-        "\ud83d\udc8e"
+        "🌩️",
+        "💎"
       ],
       "1431324431699017788": [
-        "\ud83d\udc8e",
-        "\ud83d\udcb0",
-        "\ud83d\udca1"
+        "💎",
+        "💰",
+        "💡"
       ],
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432831023107805234": [
+        "💎",
+        "🐋"
+      ],
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1433088428219699311": [
+        "💎"
       ]
     },
     "gmCooldown": 0
@@ -2104,13 +2405,13 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1431319021189333134": [
-        "\ud83c\udf29\ufe0f"
+        "🌩️"
       ],
       "1431325973248475167": [
-        "\ud83d\udc8e"
+        "💎"
       ]
     },
     "gmCooldown": 0
@@ -2138,10 +2439,10 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e"
+        "💎"
       ],
       "1431319021189333134": [
-        "\ud83d\udc8e"
+        "💎"
       ]
     },
     "gmCooldown": 0
@@ -2158,7 +2459,9 @@
           "lootBoxes": 0,
           "airdropAllocations": 0,
           "sparkTokens": 0
-        }
+        },
+        "sparkWalletAddress": "bc1qfs9e4w3j95tqgllfemyta3g3mmavqqp045t3qy",
+        "taprootWalletAddress": "bc1qfs9e4w3j95tqgllfemyta3g3mmavqqp045t3qy"
       }
     ],
     "inviteData": {
@@ -2169,11 +2472,12 @@
     },
     "reactionData": {
       "1431324431699017788": [
-        "\ud83d\udc8e",
-        "\ud83d\udcb0"
+        "💎",
+        "💰"
       ]
     },
-    "gmCooldown": 1761538142550
+    "gmCooldown": 1761538142550,
+    "twitterHandle": "Oluwatomi2003"
   },
   "803770384956653568": {
     "userId": "803770384956653568",
@@ -2202,7 +2506,7 @@
   "1019942946222641234": {
     "userId": "1019942946222641234",
     "username": "patden_intj",
-    "points": 1,
+    "points": 2,
     "activeWallet": 1,
     "wallets": [
       {
@@ -2222,7 +2526,10 @@
     },
     "reactionData": {
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
       ]
     },
     "gmCooldown": 0
@@ -2250,7 +2557,7 @@
     },
     "reactionData": {
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
       ]
     },
     "gmCooldown": 1761582892219
@@ -2282,7 +2589,7 @@
   "837230887095369729": {
     "userId": "837230887095369729",
     "username": "tino6739",
-    "points": 1,
+    "points": 34,
     "activeWallet": 1,
     "wallets": [
       {
@@ -2302,15 +2609,21 @@
     },
     "reactionData": {
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1432831023107805234": [
+        "💎"
       ]
     },
-    "gmCooldown": 0
+    "gmCooldown": 1761730299789
   },
   "190284095106842624": {
     "userId": "190284095106842624",
     "username": "wisedroid",
-    "points": 1,
+    "points": 4,
     "activeWallet": 1,
     "wallets": [
       {
@@ -2330,7 +2643,12 @@
     },
     "reactionData": {
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1432831023107805234": [
+        "💎",
+        "🐋",
+        "🔥"
       ]
     },
     "gmCooldown": 0
@@ -2338,7 +2656,7 @@
   "883355923781943416": {
     "userId": "883355923781943416",
     "username": "tttolley87",
-    "points": 1,
+    "points": 3,
     "activeWallet": 1,
     "wallets": [
       {
@@ -2360,16 +2678,19 @@
     },
     "reactionData": {
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
       ]
     },
-    "gmCooldown": 0,
+    "gmCooldown": 1761719825313,
     "twitterHandle": "tttolley87"
   },
   "1272751406494912618": {
     "userId": "1272751406494912618",
     "username": "arden.cao",
-    "points": 2,
+    "points": 3,
     "activeWallet": 1,
     "wallets": [
       {
@@ -2389,14 +2710,384 @@
     },
     "reactionData": {
       "1432400897610092655": [
-        "\ud83d\udc8e"
+        "💎"
       ]
     },
-    "gmCooldown": 1761617064889
+    "gmCooldown": 1761747209175
   },
   "764859999167184996": {
     "userId": "764859999167184996",
     "username": "floteam",
+    "points": 3,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 1761659444477
+  },
+  "826556717244088341": {
+    "userId": "826556717244088341",
+    "username": "emergeen",
+    "points": 3,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 1761671976755
+  },
+  "801151652161781791": {
+    "userId": "801151652161781791",
+    "username": "themagicianlordofchaos",
+    "points": 33,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1432804304359653396": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 1761745778546
+  },
+  "367373127514324996": {
+    "userId": "367373127514324996",
+    "username": "Unknown",
+    "points": 30,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {},
+    "gmCooldown": 0
+  },
+  "914724016672079903": {
+    "userId": "914724016672079903",
+    "username": "solution999",
+    "points": 1,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1432831023107805234": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 0
+  },
+  "375795492854038532": {
+    "userId": "375795492854038532",
+    "username": "dotsss",
+    "points": 0,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        },
+        "sparkWalletAddress": "SP326NF9FT3794JAHXHB23PQWM7XQKW51NANX9DAT",
+        "taprootWalletAddress": "34koy9wAxPBAANT6H4eSm7EXo6uJfUCxSR"
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {},
+    "gmCooldown": 0,
+    "twitterHandle": "Ciarancarrot"
+  },
+  "636572160974127125": {
+    "userId": "636572160974127125",
+    "username": "kfrs20",
+    "points": 2,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        },
+        "sparkWalletAddress": "sp1pgssy6uq8vvjanc72009htwau48awvc9l0vpsg4g8fw8ndjy2cl4nc2cs7uswr",
+        "taprootWalletAddress": "bc1pm2dmzev3j3s8es99wsed9am2vy4sj6m36gs3n6hu0n580zmdgcjqhdgums"
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1433088428219699311": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 1761710992439,
+    "twitterHandle": "F_Khondoker"
+  },
+  "764890809392168990": {
+    "userId": "764890809392168990",
+    "username": "_sumona",
+    "points": 0,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 20
+        },
+        "sparkWalletAddress": "sp1pgss8l2tq2qcudcvn7gt4lndlm6y7n79l79a4q8v0az8460t436z26v0utnjxg",
+        "taprootWalletAddress": "bc1pz54lh2wmhe2xkgk72ra20nx9tputdggsnfv0u4aut4z2az0qr8aqxwlgj9"
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1432831023107805234": [
+        "💎",
+        "🐋",
+        "🔥"
+      ]
+    },
+    "gmCooldown": 1761711341821,
+    "twitterHandle": "AirdropsBangla",
+    "lastLootBoxOpen": 1761737924536
+  },
+  "1133457357981089884": {
+    "userId": "1133457357981089884",
+    "username": "barmee01",
+    "points": 2,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        },
+        "sparkWalletAddress": "sp1pgss84gcr5rel8ra6zz9c0lzamrf9spxn9835jpsp695fwsxza4jgceywc7kgw",
+        "taprootWalletAddress": "bc1plqscezdvwh2r0a5qdjpt4xf44zygnr4tuh7y0zk30q2gcj0xfa0s888e77"
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "w22epTgpQC",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1433078912451088496": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 1761722462725,
+    "twitterHandle": "Therealbharmee"
+  },
+  "1046869707648663556": {
+    "userId": "1046869707648663556",
+    "username": "king_deesammy",
+    "points": 2,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        },
+        "sparkWalletAddress": "sp1pgss9k392t4zsc8nj60dldp7mteyn5lyuk498qfap8kvt5mm3kxyxsl8nfx7dy",
+        "taprootWalletAddress": "bc1pfkky640g9sqjtnrkaffylj7hv63xl7syzf430uup7lqjthq7evaqkryakc"
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1432873848172445726": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 1761725308194,
+    "twitterHandle": "King_deesammy"
+  },
+  "897739674825654273": {
+    "userId": "897739674825654273",
+    "username": "zeus15258",
+    "points": 6,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1433088428219699311": [
+        "💎"
+      ],
+      "1433078912451088496": [
+        "💎"
+      ],
+      "1432873848172445726": [
+        "💎"
+      ],
+      "1432831023107805234": [
+        "💎"
+      ],
+      "1432804304359653396": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 1761743225505
+  },
+  "303856720915070977": {
+    "userId": "303856720915070977",
+    "username": "balbir",
+    "points": 1,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {
+      "1433078912451088496": [
+        "💎"
+      ]
+    },
+    "gmCooldown": 0
+  },
+  "912584113049985084": {
+    "userId": "912584113049985084",
+    "username": "hongri.",
     "points": 1,
     "activeWallet": 1,
     "wallets": [
@@ -2416,6 +3107,30 @@
       "invitedUsers": []
     },
     "reactionData": {},
-    "gmCooldown": 1761659444477
+    "gmCooldown": 1761746530350
+  },
+  "934718773158641724": {
+    "userId": "934718773158641724",
+    "username": "jb_nt",
+    "points": 1,
+    "activeWallet": 1,
+    "wallets": [
+      {
+        "walletId": 1,
+        "inventory": {
+          "lootBoxes": 0,
+          "airdropAllocations": 0,
+          "sparkTokens": 0
+        }
+      }
+    ],
+    "inviteData": {
+      "inviteCode": "",
+      "uses": 0,
+      "pointsEarned": 0,
+      "invitedUsers": []
+    },
+    "reactionData": {},
+    "gmCooldown": 1761750096663
   }
 }
