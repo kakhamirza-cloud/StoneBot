@@ -66,7 +66,14 @@ export class CommandManager {
       // Open loot box command
       new SlashCommandBuilder()
         .setName('openlootbox')
-        .setDescription('Open your loot boxes'),
+        .setDescription('Open your loot boxes')
+        .addIntegerOption(option =>
+          option.setName('count')
+            .setDescription('Number of loot boxes to open (role-gated, up to 10)')
+            .setMinValue(1)
+            .setMaxValue(10)
+            .setRequired(false)
+        ),
 
       // Edit wallet command
       new SlashCommandBuilder()
@@ -542,74 +549,92 @@ export class CommandManager {
   }
 
   private async handleOpenLootBox(interaction: CommandInteraction, context: CommandContext): Promise<void> {
-    // Check 30-second cooldown
+    // Check 30-second cooldown (applies to batch as well)
     const now = Date.now();
-    const cooldownTime = 30 * 1000; // 30 seconds in milliseconds
-    
+    const cooldownTime = 30 * 1000;
     if (context.userData.lastLootBoxOpen && (now - context.userData.lastLootBoxOpen) < cooldownTime) {
       const remainingTime = Math.ceil((cooldownTime - (now - context.userData.lastLootBoxOpen)) / 1000);
-      await interaction.reply({ 
-        content: `⏰ **Cooldown Active!**\n\nYou can open another lootbox in **${remainingTime} seconds**.`, 
-        ephemeral: true 
+      await interaction.reply({
+        content: `⏰ **Cooldown Active!**\n\nYou can open lootboxes again in **${remainingTime} seconds**.`,
+        ephemeral: true
       });
       return;
     }
 
     const activeWallet = this.storage.getActiveWallet(context.userData);
-    
     if (activeWallet.inventory.lootBoxes === 0) {
-      await interaction.reply({ 
-        content: '❌ You don\'t have any loot boxes to open!', 
-        ephemeral: true 
-      });
+      await interaction.reply({ content: '❌ You don\'t have any loot boxes to open!', ephemeral: true });
       return;
     }
 
-    // Open one loot box
-    const reward = await this.lootBoxManager.openLootBox(context.userId, context.userData.activeWallet);
-    
-    if (!reward) {
-      await interaction.reply({ 
-        content: '❌ Failed to open loot box. Please try again.', 
-        ephemeral: true 
-      });
+    // Determine batch count: only members with role 1432390111865077781 can batch up to 10
+    const requestedCount = ((interaction as any).options.get('count')?.value as number) || 1;
+    const hasBatchRole = (() => {
+      const member: any = (interaction as any).member;
+      try {
+        return !!member?.roles?.value?.has?.('1432390111865077781') || member?.roles?.cache?.has?.('1432390111865077781');
+      } catch {
+        return false;
+      }
+    })();
+
+    const allowedCount = hasBatchRole ? Math.min(Math.max(1, requestedCount), 10) : 1;
+    const actualCount = Math.min(allowedCount, activeWallet.inventory.lootBoxes);
+
+    // Open N loot boxes
+    const rewards: LootBoxReward[] = [];
+    for (let i = 0; i < actualCount; i++) {
+      const reward = await this.lootBoxManager.openLootBox(context.userId, context.userData.activeWallet);
+      if (reward) rewards.push(reward);
+    }
+
+    if (rewards.length === 0) {
+      await interaction.reply({ content: '❌ Failed to open loot boxes. Please try again.', ephemeral: true });
       return;
     }
 
-    // Create reward embed
     const displayName = (context.user as any).globalName || context.user.username;
     const userAvatarUrl = context.user.displayAvatarURL({ size: 128 });
-    
+
+    // Summarize rewards
+    const summary = new Map<string, number>();
+    let airdrops = 0;
+    for (const r of rewards) {
+      const key = r.type === 'spark_tokens' ? `${r.type}:${r.tokenAmount}` : r.type;
+      summary.set(key, (summary.get(key) || 0) + 1);
+      if (r.type === 'airdrop') airdrops++;
+    }
+
+    const lines: string[] = [];
+    for (const [key, count] of summary.entries()) {
+      if (key.startsWith('spark_tokens:')) {
+        const amount = key.split(':')[1];
+        lines.push(`• ${amount} tokens × ${count}`);
+      } else if (key === 'airdrop') {
+        lines.push(`• Airdrop × ${count}`);
+      }
+    }
+
     const embed = new EmbedBuilder()
-      .setTitle('Loot Box Opening')
-      .setDescription(`**${displayName}** has opened a Loot Box and received...`)
+      .setTitle(actualCount > 1 ? `Loot Boxes Opened (${actualCount})` : 'Loot Box Opening')
+      .setDescription(`**${displayName}** opened **${actualCount}** loot box${actualCount > 1 ? 'es' : ''} and received:`)
       .setThumbnail(userAvatarUrl)
-      .setColor(0xFF8C00) // Orange color for the background
+      .setColor(0xFF8C00)
       .setTimestamp();
 
-    // Add reward information as a field
-    embed.addFields({ 
-      name: '🎁 Reward Received', 
-      value: `**${reward.name}**\n${reward.description}`, 
-      inline: false 
-    });
-
-    // Add specific image based on reward type
-    if (reward.imageUrl) {
-      embed.setImage(reward.imageUrl);
-    }
+    embed.addFields({ name: '🎁 Rewards', value: lines.join('\n') || 'No rewards', inline: false });
 
     await interaction.reply({ embeds: [embed] });
 
-    // Update cooldown timestamp - fetch fresh data first
+    // Update cooldown timestamp
     const freshUserData = this.storage.getUserData(context.userId);
     if (freshUserData) {
       freshUserData.lastLootBoxOpen = now;
       this.storage.saveUserData(context.userId, freshUserData);
     }
 
-    // Send airdrop notifications if user received an airdrop allocation
-    if (reward.type === 'airdrop') {
+    // Notify if any airdrop awarded
+    if (airdrops > 0) {
       await this.sendAirdropNotifications(interaction, context);
     }
   }
