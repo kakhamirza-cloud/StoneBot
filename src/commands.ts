@@ -596,35 +596,50 @@ export class CommandManager {
     const displayName = (context.user as any).globalName || context.user.username;
     const userAvatarUrl = context.user.displayAvatarURL({ size: 128 });
 
-    // Summarize rewards
-    const summary = new Map<string, number>();
     let airdrops = 0;
-    for (const r of rewards) {
-      const key = r.type === 'spark_tokens' ? `${r.type}:${r.tokenAmount}` : r.type;
-      summary.set(key, (summary.get(key) || 0) + 1);
-      if (r.type === 'airdrop') airdrops++;
-    }
+    if (actualCount === 1) {
+      // Classic single-open embed with reward image
+      const reward = rewards[0];
+      const embed = new EmbedBuilder()
+        .setTitle('Loot Box Opening')
+        .setDescription(`**${displayName}** has opened a Loot Box and received...`)
+        .setThumbnail(userAvatarUrl)
+        .setColor(0xFF8C00)
+        .setTimestamp();
 
-    const lines: string[] = [];
-    for (const [key, count] of summary.entries()) {
-      if (key.startsWith('spark_tokens:')) {
-        const amount = key.split(':')[1];
-        lines.push(`• ${amount} tokens × ${count}`);
-      } else if (key === 'airdrop') {
-        lines.push(`• Airdrop × ${count}`);
+      embed.addFields({ name: '🎁 Reward Received', value: `**${reward.name}**\n${reward.description}`, inline: false });
+      if (reward.imageUrl) embed.setImage(reward.imageUrl);
+
+      await interaction.reply({ embeds: [embed] });
+      if (reward.type === 'airdrop') airdrops = 1;
+    } else {
+      // Batch summary embed
+      const summary = new Map<string, number>();
+      for (const r of rewards) {
+        const key = r.type === 'spark_tokens' ? `${r.type}:${r.tokenAmount}` : r.type;
+        summary.set(key, (summary.get(key) || 0) + 1);
+        if (r.type === 'airdrop') airdrops++;
       }
+
+      const lines: string[] = [];
+      for (const [key, count] of summary.entries()) {
+        if (key.startsWith('spark_tokens:')) {
+          const amount = key.split(':')[1];
+          lines.push(`• ${amount} tokens × ${count}`);
+        } else if (key === 'airdrop') {
+          lines.push(`• Airdrop × ${count}`);
+        }
+      }
+
+      const embed = new EmbedBuilder()
+        .setTitle(`Loot Boxes Opened (${actualCount})`)
+        .setDescription(`**${displayName}** opened **${actualCount}** loot boxes and received:`)
+        .setThumbnail(userAvatarUrl)
+        .setColor(0xFF8C00)
+        .setTimestamp();
+      embed.addFields({ name: '🎁 Rewards', value: lines.join('\n') || 'No rewards', inline: false });
+      await interaction.reply({ embeds: [embed] });
     }
-
-    const embed = new EmbedBuilder()
-      .setTitle(actualCount > 1 ? `Loot Boxes Opened (${actualCount})` : 'Loot Box Opening')
-      .setDescription(`**${displayName}** opened **${actualCount}** loot box${actualCount > 1 ? 'es' : ''} and received:`)
-      .setThumbnail(userAvatarUrl)
-      .setColor(0xFF8C00)
-      .setTimestamp();
-
-    embed.addFields({ name: '🎁 Rewards', value: lines.join('\n') || 'No rewards', inline: false });
-
-    await interaction.reply({ embeds: [embed] });
 
     // Update cooldown timestamp
     const freshUserData = this.storage.getUserData(context.userId);
