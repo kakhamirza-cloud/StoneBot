@@ -9,7 +9,8 @@ export class DailyRolePointsService {
   // Role configuration
   private readonly ROLE_CONFIG = {
     '1432390111865077781': 300, // 300 points daily
-    '1432395369689649273': 30  // 30 points daily
+    '1432395369689649273': 30,  // 30 points daily
+    '1436372227871477790': 10   // 10 points daily
   };
 
   // Notification channel ID
