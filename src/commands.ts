@@ -162,7 +162,11 @@ export class CommandManager {
       new SlashCommandBuilder()
         .setName('fixduplicatetwitter')
         .setDescription('Fix duplicate Twitter handles by clearing duplicates (Admin only)')
-        .setDefaultMemberPermissions(8) // Administrator permission
+        .setDefaultMemberPermissions(8), // Administrator permission
+
+      new SlashCommandBuilder()
+        .setName('leaderboard')
+        .setDescription('Show top 10 members by $Stone Tokens')
     ];
   }
 
@@ -233,6 +237,9 @@ export class CommandManager {
           break;
         case 'fixduplicatetwitter':
           await this.handleFixDuplicateTwitter(interaction, context);
+          break;
+        case 'leaderboard':
+          await this.handleLeaderboard(interaction, context);
           break;
         default:
           await interaction.reply({ content: 'Unknown command!', ephemeral: true });
@@ -2022,6 +2029,96 @@ Reward Types:
       content: message, 
       ephemeral: true 
     });
+  }
+
+  /**
+   * Handle leaderboard command - show top 10 users by stone tokens
+   */
+  private async handleLeaderboard(interaction: CommandInteraction, context: CommandContext): Promise<void> {
+    try {
+      // Get all users
+      const allUsers = this.storage.getAllUsers();
+      
+      // Calculate total stone tokens for each user (sum across all wallets)
+      const userTokenTotals: Array<{ userId: string; username: string; totalTokens: number }> = [];
+      
+      for (const [userId, userData] of Object.entries(allUsers)) {
+        let totalTokens = 0;
+        
+        // Sum tokens from all wallets
+        if (userData.wallets && userData.wallets.length > 0) {
+          for (const wallet of userData.wallets) {
+            totalTokens += wallet.inventory.sparkTokens || 0;
+          }
+        }
+        
+        // Only include users with tokens > 0
+        if (totalTokens > 0) {
+          userTokenTotals.push({
+            userId,
+            username: userData.username,
+            totalTokens
+          });
+        }
+      }
+      
+      // Sort by total tokens (descending)
+      userTokenTotals.sort((a, b) => b.totalTokens - a.totalTokens);
+      
+      // Get top 10
+      const top10 = userTokenTotals.slice(0, 10);
+      
+      if (top10.length === 0) {
+        await interaction.reply({
+          content: '📊 **Leaderboard**\n\nNo users have $Stone Tokens yet!',
+          ephemeral: false
+        });
+        return;
+      }
+      
+      // Fetch Discord usernames for better display (optional, fallback to stored username)
+      const leaderboardEntries: string[] = [];
+      const medalEmojis = ['🥇', '🥈', '🥉'];
+      
+      for (let i = 0; i < top10.length; i++) {
+        const entry = top10[i];
+        const rank = i + 1;
+        const medal = rank <= 3 ? medalEmojis[rank - 1] : `${rank}.`;
+        
+        // Try to fetch Discord user for display name
+        let displayName = entry.username;
+        try {
+          if (interaction.guild) {
+            const member = await interaction.guild.members.fetch(entry.userId).catch(() => null);
+            if (member) {
+              displayName = (member.user as any).globalName || member.user.username;
+            }
+          }
+        } catch (error) {
+          // Fallback to stored username if fetch fails
+          displayName = entry.username;
+        }
+        
+        leaderboardEntries.push(`${medal} **${displayName}** - ${entry.totalTokens.toLocaleString()} $Stone Tokens`);
+      }
+      
+      // Create embed
+      const embed = new EmbedBuilder()
+        .setTitle('🏆 $Stone Tokens Leaderboard')
+        .setDescription(`Top ${top10.length} members by $Stone Tokens:\n\n${leaderboardEntries.join('\n')}`)
+        .setColor(0xFFD700) // Gold color
+        .setFooter({ text: 'Total users with tokens: ' + userTokenTotals.length })
+        .setTimestamp();
+      
+      await interaction.reply({ embeds: [embed], ephemeral: false });
+      
+    } catch (error) {
+      console.error('Error handling leaderboard command:', error);
+      await interaction.reply({
+        content: '❌ An error occurred while fetching the leaderboard. Please try again later.',
+        ephemeral: true
+      });
+    }
   }
 
   /**
