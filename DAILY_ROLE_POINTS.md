@@ -131,3 +131,5 @@ The bot shows:
 - Members who no longer have the roles won't receive points
 
 
+
+
